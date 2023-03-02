@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  // font-family: $font-primary;
+  -webkit-tap-highlight-color: transparent; // remove color highlight on tap
+
+  // Remove arrows/spinners from numeric inputs
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    appearance: textfield;
+  }
+}
+
+a {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  width: fit-content;
+  height: fit-content;
+  &:focus-visible, &:focus-within, &:focus, &:active, &:target {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+  }
+}
