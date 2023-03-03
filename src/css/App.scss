@@ -1,3 +1,11 @@
+// Color Palette
+$blue-600: #24549b;
+$blue-900: #011936;
+$purple-100: #d2d4e4;
+$gray-800: #2C2C38;
+$gray-900: #21212D;
+
+
 * {
   padding: 0;
   margin: 0;
@@ -31,3 +39,5 @@ a {
     background-color: transparent;
   }
 }
+
+@import '../components/Sidebar/Sidebar';
