@@ -1,4 +1,5 @@
 import '../../css/App.css';
+import { BoardSelector } from '../BoardSelector/BoardSelector';
 
 export const Sidebar = () => {
   return (
@@ -6,8 +7,12 @@ export const Sidebar = () => {
       <header>
         <h2>Kan-Do</h2>
       </header>
-      <h5>Meus quadros</h5>
-
+      <main>
+        <h5>Meus quadros (8)</h5>
+        <BoardSelector />
+        <BoardSelector />
+        <BoardSelector />
+      </main>
     </div>
   )
 }

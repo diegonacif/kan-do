@@ -1,4 +1,5 @@
 // Color Palette
+$white: #fafafa;
 $blue-600: #24549b;
 $blue-900: #011936;
 $purple-100: #d2d4e4;
@@ -41,3 +42,4 @@ a {
 }
 
 @import '../components/Sidebar/Sidebar';
+@import '../components/BoardSelector/BoardSelector';
