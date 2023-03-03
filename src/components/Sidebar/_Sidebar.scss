@@ -17,5 +17,10 @@
     display: flex;
     flex-direction: column;
     padding: 1rem;
+
+    h5 {
+      padding: 0.5rem 0;
+      font-size: 0.6825rem;
+    }
   }
 }

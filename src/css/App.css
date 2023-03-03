@@ -54,7 +54,34 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   flex-direction: column;
   padding: 1rem;
 }
+.sidebar-container main h5 {
+  padding: 0.5rem 0;
+  font-size: 0.6825rem;
+}
 
-.board-selector.container {
+.board-selector-container {
+  position: relative;
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  font-size: 0.75rem;
+}
+.board-selector-container svg {
+  z-index: 2;
+}
+.board-selector-container span {
+  z-index: 2;
+}
+
+.selected::after {
+  position: absolute;
+  left: -1rem;
+  top: 0;
+  content: "";
+  width: 18rem;
+  height: 100%;
+  background-color: #24549b;
+  border-radius: 0 20px 20px 0;
+  z-index: 1;
 }/*# sourceMappingURL=App.css.map */

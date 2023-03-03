@@ -8,7 +8,7 @@ export const Sidebar = () => {
         <h2>Kan-Do</h2>
       </header>
       <main>
-        <h5>Meus quadros (8)</h5>
+        <h5>MEUS QUADROS (8)</h5>
         <BoardSelector />
         <BoardSelector />
         <BoardSelector />
