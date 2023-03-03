@@ -1,10 +1,26 @@
 .sidebar-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: $gray-800;
   width: 20rem;
   height: 100vh;
   color: $white;
+
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -0.75rem;
+    height: 3.5rem;
+    width: 0.85rem;
+    background-color: $gray-800;
+    font-weight: 600;
+    font-size: 1rem;
+    color: $white;
+    border: 0;
+    border-radius: 0 12px 12px 0;
+  }
 
   header {
     display: flex;
@@ -21,6 +37,7 @@
     h5 {
       padding: 0.75rem 0;
       font-size: 0.6825rem;
+      color: $gray-400;
     }
   }
 }

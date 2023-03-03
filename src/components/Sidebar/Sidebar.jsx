@@ -15,6 +15,7 @@ export const Sidebar = () => {
         <BoardSelector />
         <BoardSelector />
       </main>
+      <button>&lt;</button>
     </div>
   )
 }
