@@ -55,7 +55,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   padding: 1rem;
 }
 .sidebar-container main h5 {
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
   font-size: 0.6825rem;
 }
 

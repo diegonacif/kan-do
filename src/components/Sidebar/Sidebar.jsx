@@ -11,6 +11,8 @@ export const Sidebar = () => {
         <h5>MEUS QUADROS (8)</h5>
         <BoardSelector />
         <BoardSelector />
+        <BoardSelector selected />
+        <BoardSelector />
         <BoardSelector />
       </main>
     </div>
