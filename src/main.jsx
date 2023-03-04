@@ -7,14 +7,17 @@ import {
 } from "react-router-dom";
 import { App } from './App'
 import { Login } from './components/Login/Login';
+import { AuthEmailProvider } from './contexts/AuthEmailProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<App />} />
-        <Route path="/" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+    <AuthEmailProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/home" element={<App />} />
+          <Route path="/" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthEmailProvider>
+  </React.StrictMode>
 )

@@ -1,6 +1,8 @@
+import { Eye, EyeSlash, LockKeyOpen, UserCircle, XCircle } from "phosphor-react";
 import { useContext, useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from "react-router-dom";
+import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
 import "../../css/App.css";
 
 export const Login = () => {
@@ -97,21 +99,24 @@ export const Login = () => {
     <div className="login-container">
       <header>
         <Link to="/">
-          <span>The Geek Store</span>
+          <span>Kan-Do</span>
         </Link>
-        <XCircle 
-          size={36} 
-          color="#1cbdc8" 
-          weight="duotone" id="close-button" 
-          onClick={() => handleXButton()} 
-        />
+        {
+          loginMode !== "login" &&
+          <XCircle 
+            size={32} 
+            // color="#1cbdc8" 
+            weight="duotone" id="close-button" 
+            onClick={() => handleXButton()} 
+          />
+        }
       </header>
       <section className="login-wrapper">
-        <video id="background-video" loop autoPlay muted>
+        {/* <video id="background-video" loop autoPlay muted>
           <source src={bgVideo} type="video/mp4" />
           <source src={bgVideo} type="video/webm" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
         {
           loginMode === "login" ?
           // Login Mode
@@ -119,7 +124,7 @@ export const Login = () => {
             <h3>Faça login para continuar</h3>
             <div className="input-wrapper">
               <div className="input-row">
-                <UserCircle size={28} color="#1b1b1b" weight="duotone" className="login-icons" />
+                <UserCircle size={28} weight="duotone" className="login-icons" />
                 <input 
                   type="text" 
                   placeholder="E-mail" 
@@ -127,7 +132,7 @@ export const Login = () => {
                 />
               </div>
               <div className="input-row">
-                <LockKeyOpen size={28} color="#1b1b1b" weight="duotone" className="login-icons" />
+                <LockKeyOpen size={28} weight="duotone" className="login-icons" />
                 <input 
                   type={isPasswordShown ? "text" : "password"} 
                   placeholder="Senha" 
@@ -137,14 +142,12 @@ export const Login = () => {
                   isPasswordShown ?
                   <Eye 
                     size={24} 
-                    color="#1b1b1b" 
                     weight="duotone" 
                     className="password-eye-icon" 
                     onClick={() => setIsPasswordShown(false)}
                   /> :
                   <EyeSlash 
                     size={24} 
-                    color="#1b1b1b" 
                     weight="duotone" 
                     className="password-eye-icon" 
                     onClick={() => setIsPasswordShown(true)}
@@ -168,7 +171,7 @@ export const Login = () => {
             <h3>Insira seu e-mail e clique em Enviar</h3>
             <div className="input-wrapper">
               <div className="input-row">
-                <UserCircle size={28} color="#1b1b1b" weight="duotone" className="login-icons" />
+                <UserCircle size={28} weight="duotone" className="login-icons" />
                 <input 
                   type="text" 
                   placeholder="E-mail" 
@@ -191,7 +194,7 @@ export const Login = () => {
             <h3>Faça seu registro</h3>
             <div className="input-wrapper">
               <div className="input-row">
-                <UserCircle size={28} color="#1b1b1b" weight="duotone" className="login-icons" />
+                <UserCircle size={28} weight="duotone" className="login-icons" />
                 <input 
                   type="text" 
                   placeholder="E-mail" 
@@ -199,7 +202,7 @@ export const Login = () => {
                 />
               </div>
               <div className="input-row">
-                <LockKeyOpen size={28} color="#1b1b1b" weight="duotone" className="login-icons" />
+                <LockKeyOpen size={28} weight="duotone" className="login-icons" />
                 <input 
                   type={isPasswordShown ? "text" : "password"} 
                   placeholder="Senha" 
@@ -209,14 +212,12 @@ export const Login = () => {
                   isPasswordShown ?
                   <Eye 
                     size={24} 
-                    color="#1b1b1b" 
                     weight="duotone" 
                     className="password-eye-icon" 
                     onClick={() => setIsPasswordShown(false)}
                   /> :
                   <EyeSlash 
                     size={24} 
-                    color="#1b1b1b" 
                     weight="duotone" 
                     className="password-eye-icon" 
                     onClick={() => setIsPasswordShown(true)}
@@ -224,7 +225,7 @@ export const Login = () => {
                 }
               </div>
               <div className="input-row">
-                <LockKeyOpen size={28} color="#1b1b1b" weight="duotone" className="login-icons" />
+                <LockKeyOpen size={28} weight="duotone" className="login-icons" />
                 <input 
                   type={isPasswordShown ? "text" : "password"} 
                   placeholder="Confirme a senha" 
