@@ -1,7 +1,7 @@
 import '../../css/App.css';
 import { BoardSelector } from '../BoardSelector/BoardSelector';
 
-export const Sidebar = () => {
+export const Sidebar = ({ modalHide }) => {
   return (
     <div className="sidebar-container">
       <header>
@@ -15,7 +15,15 @@ export const Sidebar = () => {
         <BoardSelector />
         <BoardSelector />
       </main>
-      <button>&lt;</button>
+      <button onClick={() => modalHide()}>&lt;</button>
+    </div>
+  )
+}
+
+export const OpenModalButton = ({ modalOpen }) => {
+  return (
+    <div className="open-modal-button-container">
+      <button onClick={() => modalOpen()}>&gt;</button>
     </div>
   )
 }

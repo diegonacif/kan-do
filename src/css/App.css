@@ -78,6 +78,22 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   color: #aaaaaa;
 }
 
+.open-modal-button-container button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0rem;
+  height: 4.5rem;
+  width: 0.85rem;
+  background-color: #2C2C38;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fafafa;
+  border: 0;
+  border-radius: 0 12px 12px 0;
+  cursor: pointer;
+}
+
 .board-selector-container {
   position: relative;
   display: flex;
@@ -314,4 +330,9 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   z-index: 1;
   min-height: calc(100vh - 3.5rem);
   min-width: 100vw;
+}
+
+.rodal-container #rodal-dialog {
+  padding: 0;
+  margin: 0;
 }/*# sourceMappingURL=App.css.map */

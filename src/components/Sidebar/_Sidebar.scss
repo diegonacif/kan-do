@@ -42,3 +42,21 @@
     }
   }
 }
+
+.open-modal-button-container {
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0rem;
+    height: 4.5rem;
+    width: 0.85rem;
+    background-color: $gray-800;
+    font-weight: 600;
+    font-size: 1rem;
+    color: $white;
+    border: 0;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+  }
+}
