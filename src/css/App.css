@@ -129,4 +129,10 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 }
 .header-container section svg {
   color: #aaaaaa;
+}
+
+.cards-container-container {
+  width: 100%;
+  min-height: calc(100vh - 4.5rem);
+  background-color: #21212D;
 }/*# sourceMappingURL=App.css.map */
