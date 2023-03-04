@@ -7,12 +7,16 @@ $purple-100: #d2d4e4;
 $gray-800: #2C2C38;
 $gray-900: #21212D;
 
+// Font
+$font-primary: 'DM Sans', sans-serif;
+
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  // font-family: $font-primary;
+  font-family: $font-primary;
+  font-weight: 300;
   -webkit-tap-highlight-color: transparent; // remove color highlight on tap
 
   // Remove arrows/spinners from numeric inputs
