@@ -38,7 +38,7 @@ export const Login = () => {
 
   // Back to main page when logged in
   useEffect(() => {
-    isSignedIn ? navigate("/") : null;
+    isSignedIn ? navigate("/home") : null;
   }, [isSignedIn])
 
   // Inputs data going to auth context
