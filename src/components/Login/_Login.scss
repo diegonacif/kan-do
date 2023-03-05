@@ -31,12 +31,15 @@
     }
 
     svg {
-      position: absolute;
-      bottom: -2.5rem;
-      right: 1rem;
       cursor: pointer;
       color: $gray-400;
     }
+
+    // #light-button {
+    //   position: absolute;
+    //   bottom: -2.5rem;
+    //   right: 0.75rem;
+    // }
   }
 
   .login-wrapper {

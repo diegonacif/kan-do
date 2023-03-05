@@ -286,9 +286,6 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   font-family: "DM Sans", sans-serif;
 }
 .login-container header svg {
-  position: absolute;
-  bottom: -2.5rem;
-  right: 1rem;
   cursor: pointer;
   color: #aaaaaa;
 }

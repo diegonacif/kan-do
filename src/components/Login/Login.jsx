@@ -105,7 +105,12 @@ export const Login = () => {
         <Link to="/">
           <span>Kan-Do</span>
         </Link>
-        <LightModeButton />
+        {
+          loginMode === "login" &&
+          <div id="light-button">
+            <LightModeButton />
+          </div>
+        }
         {
           loginMode !== "login" &&
           <XCircle 
