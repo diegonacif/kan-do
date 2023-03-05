@@ -286,6 +286,9 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   font-family: "DM Sans", sans-serif;
 }
 .login-container header svg {
+  position: absolute;
+  bottom: -2.5rem;
+  right: 1rem;
   cursor: pointer;
   color: #aaaaaa;
 }
@@ -384,6 +387,27 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   z-index: 1;
   min-height: calc(100vh - 3.5rem);
   min-width: 100vw;
+}
+.login-container.light-mode {
+  background: #e0e0e0;
+}
+.login-container.light-mode header {
+  background-color: #aaaaaa;
+}
+.login-container.light-mode header span {
+  color: #21212D;
+}
+.login-container.light-mode header svg {
+  color: #21212D;
+}
+.login-container.light-mode .login-wrapper {
+  color: #21212D;
+}
+.login-container.light-mode .login-wrapper h3 {
+  color: #21212D;
+}
+.login-container.light-mode .login-wrapper #forgot-password, .login-container.light-mode .login-wrapper #register {
+  color: #21212D;
 }
 
 .header-menu-container {

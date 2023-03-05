@@ -9,6 +9,8 @@
   background: $gray-800;
   overflow: hidden;
 
+  
+
   header {
     position: absolute;
     display: flex;
@@ -29,6 +31,9 @@
     }
 
     svg {
+      position: absolute;
+      bottom: -2.5rem;
+      right: 1rem;
       cursor: pointer;
       color: $gray-400;
     }
@@ -141,5 +146,32 @@
     z-index: 1;
     min-height: calc(100vh - 3.5rem);
     min-width: 100vw;
+  }
+
+  &.light-mode {
+    background: $gray-100;
+
+    header {
+      background-color: $gray-400;
+      span {
+        color: $gray-900;
+      }
+
+      svg {
+        color: $gray-900;
+      }
+    }
+
+    .login-wrapper {
+      color: $gray-900;
+
+      h3 {
+        color: $gray-900;
+      }
+
+      #forgot-password, #register {
+        color: $gray-900;
+      }
+    }
   }
 }

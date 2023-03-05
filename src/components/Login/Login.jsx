@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from "react-router-dom";
 import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
+import { LightModeContext } from "../../contexts/LightModeProvider";
+import { LightModeButton } from '../../components/LightModeButton/LightModeButton';
 import "../../css/App.css";
 
 export const Login = () => {
@@ -11,6 +13,8 @@ export const Login = () => {
   const [loginMode, setLoginMode] = useState("login");
   const navigate = useNavigate();
 
+  const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+  
   // Hook Form Controller
   const {
     watch,
@@ -96,11 +100,12 @@ export const Login = () => {
   }
 
   return (
-    <div className="login-container">
+    <div className={`login-container ${isLightMode && 'light-mode'}`}>
       <header>
         <Link to="/">
           <span>Kan-Do</span>
         </Link>
+        <LightModeButton />
         {
           loginMode !== "login" &&
           <XCircle 
