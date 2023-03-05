@@ -43,6 +43,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   width: 20rem;
   height: 100vh;
   color: #fafafa;
+  filter: drop-shadow(0 0 10px #000000);
 }
 .sidebar-container button {
   position: absolute;
@@ -80,12 +81,13 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 .sidebar-container.light-mode {
   background-color: #fafafa;
   color: #21212D;
+  filter: drop-shadow(0 0 10px #333333);
 }
 .sidebar-container.light-mode header {
   background-color: #cecece;
 }
 .sidebar-container.light-mode button {
-  background-color: #fafafa;
+  background-color: #e0e0e0;
   color: #21212D;
 }
 
@@ -103,9 +105,10 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   border: 0;
   border-radius: 0 12px 12px 0;
   cursor: pointer;
+  filter: drop-shadow(0 0 8px #000000);
 }
 .open-modal-button-container.light-mode button {
-  background-color: #fafafa;
+  background-color: #e0e0e0;
   color: #21212D;
 }
 
