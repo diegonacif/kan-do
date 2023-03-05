@@ -35,6 +35,10 @@
   section {
     .section-title {
       color: $gray-900;
+
+      span {
+        color: $gray-800;
+      }
     }
   }
 }
