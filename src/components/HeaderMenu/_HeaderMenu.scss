@@ -6,4 +6,8 @@
   span {
     cursor: pointer;
   }
+
+  &.light-mode {
+    background-color: $gray-200;
+  }
 }

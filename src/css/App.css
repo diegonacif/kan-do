@@ -384,6 +384,9 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 .header-menu-container span {
   cursor: pointer;
 }
+.header-menu-container.light-mode {
+  background-color: #cecece;
+}
 
 .light-mode-button-container {
   cursor: pointer;
