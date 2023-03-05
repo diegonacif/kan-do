@@ -5,18 +5,18 @@ import { LightModeContext } from '../../contexts/LightModeProvider';
 import Rodal from 'rodal';
 
 import '../../css/App.css';
+import { NewTask } from "../NewTask/NewTask";
 
 export const Header = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [newTaskShow, setNewTaskShow] = useState(false);
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
 
-  function modalShow() {
-    setIsModalVisible(true);
-  }
+  function handleMenuShow() { setIsMenuVisible(true); }
+  function handleModalHide() { setIsMenuVisible(false); }
 
-  function modalHide() {
-    setIsModalVisible(false);
-  }
+  function handleOpenNewTask() { setNewTaskShow(true); }
+  function handleCloseNewTask() { setNewTaskShow(false); }
 
   const modalCustomStyles = {
     height: 'fit-content',
@@ -27,16 +27,16 @@ export const Header = () => {
     <div className={`header-container ${isLightMode && 'light-mode'}`}>
       <h3>Nome do quadro</h3>
       <section>
-        <button>Adicionar nova tarefa</button>
+        <button onClick={() => handleOpenNewTask()}>Adicionar nova tarefa</button>
         <DotsThreeOutlineVertical
           size={20} 
           weight="fill" 
-          onClick={() => modalShow()}
+          onClick={() => handleMenuShow()}
         />
       </section>
       <Rodal
-        visible={isModalVisible}
-        onClose={() => modalHide()}
+        visible={isMenuVisible}
+        onClose={() => handleModalHide()}
         className='rodal-container'
         id='rodal-dialog'
         animation='slideRight'
@@ -47,6 +47,20 @@ export const Header = () => {
         customStyles={modalCustomStyles}
       >
         <HeaderMenu />
+      </Rodal>
+      <Rodal
+        visible={newTaskShow}
+        onClose={() => handleCloseNewTask()}
+        className='rodal-container'
+        id='rodal-new-task'
+        animation='zoom'
+        duration={300}
+        showMask={true}
+        closeMaskOnClick={true}
+        showCloseButton={false}
+        customStyles={modalCustomStyles}
+      >
+        <NewTask />
       </Rodal>
     </div>
   )

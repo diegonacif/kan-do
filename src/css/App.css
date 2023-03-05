@@ -181,6 +181,16 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   padding: 0.5rem 1rem;
   background-color: #2C2C38;
 }
+.header-container .rodal-container #rodal-new-task {
+  width: clamp(10rem, 90vw, 30rem) !important;
+  padding: 0;
+  margin: auto;
+  padding: 1rem;
+  background-color: #2C2C38;
+  border-radius: 12px;
+  overflow: hidden;
+  filter: drop-shadow(2px 2px 10px #000000);
+}
 .header-container.light-mode {
   background-color: #aaaaaa;
   color: #21212D;
@@ -421,6 +431,33 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 
 .light-mode-button-container {
   cursor: pointer;
+}
+
+.new-task-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.new-task-container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.new-task-container header svg {
+  cursor: pointer;
+}
+.new-task-container textarea {
+  margin-top: 1rem;
+  padding: 0.25rem;
+  border-radius: 4px;
+  border: 0;
+}
+.new-task-container select {
+  background-color: #fafafa;
+  height: 1.75rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  border: 0;
 }
 
 .rodal-container #rodal-dialog {
