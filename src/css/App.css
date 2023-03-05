@@ -148,6 +148,14 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 .header-container section svg {
   color: #aaaaaa;
 }
+.header-container .rodal-container #rodal-dialog {
+  padding: 0;
+  margin-right: 2rem;
+  margin-left: auto;
+  margin-top: 5rem;
+  padding: 0.5rem 1rem;
+  background-color: #2C2C38;
+}
 
 .cards-container-container {
   display: grid;
@@ -335,6 +343,10 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 .header-menu-container {
   display: flex;
   flex-direction: column;
+  background-color: #2C2C38;
+}
+.header-menu-container span {
+  cursor: pointer;
 }
 
 .rodal-container #rodal-dialog {
