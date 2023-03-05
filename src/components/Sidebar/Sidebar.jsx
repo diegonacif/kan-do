@@ -1,10 +1,14 @@
-import '../../css/App.css';
+import { useContext } from 'react';
+import { LightModeContext } from '../../contexts/LightModeProvider';
 import { BoardSelector } from '../BoardSelector/BoardSelector';
 import { LightModeButton } from '../LightModeButton/LightModeButton';
+import '../../css/App.css';
 
 export const Sidebar = ({ modalHide }) => {
+  const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+
   return (
-    <div className="sidebar-container">
+    <div className={`sidebar-container ${isLightMode && 'light-mode'}`}>
       <header>
         <h2>Kan-Do</h2>
         <LightModeButton />
@@ -23,8 +27,10 @@ export const Sidebar = ({ modalHide }) => {
 }
 
 export const OpenModalButton = ({ modalOpen }) => {
+  const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+
   return (
-    <div className="open-modal-button-container">
+    <div className={`open-modal-button-container ${isLightMode && 'light-mode'}`}>
       <button onClick={() => modalOpen()}>&gt;</button>
     </div>
   )

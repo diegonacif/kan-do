@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+import { KanCard } from '../KanCard/KanCard';
+import { LightModeContext } from '../../contexts/LightModeProvider';
 import { Circle } from 'phosphor-react';
 import '../../css/App.css';
-import { KanCard } from '../KanCard/KanCard';
 
 export const CardsContainer = () => {
+  const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+  
   return (
-    <div className="cards-container-container">
+    <div className={`cards-container-container ${isLightMode && 'light-mode'}`}>
       <section>
         <div className="section-title">
           <Circle size={13} color="#f1e585" weight="fill" />

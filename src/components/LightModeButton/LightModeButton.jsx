@@ -10,12 +10,16 @@ export const LightModeButton = () => {
     isLightMode,
     setIsLightMode
   } = useContext(LightModeContext);
+
+  function handleLightModeToggle() {
+    setIsLightMode(current => !current)
+  }
   return (
     <div className="light-mode-button-container">
       {
         !isLightMode ?
-        <Moon size={36} weight="fill" /> :
-        <Sun size={36} weight="fill" />
+        <Moon size={28} weight="duotone" onClick={() => handleLightModeToggle()} /> :
+        <Sun size={28} weight="duotone" onClick={() => handleLightModeToggle()}/>
       }
     </div>
   )
