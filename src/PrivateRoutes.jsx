@@ -4,10 +4,10 @@ import { AuthEmailContext } from "./contexts/AuthEmailProvider"
 
 export const PrivateRoutes = () => {
   const { isSignedIn, isLoading } = useContext(AuthEmailContext);
-  console.log(isSignedIn);
+  // console.log(isSignedIn);
   
   return isLoading ?
-  console.log("Loading Auth Data...") :
+  null :
   isSignedIn ? <Outlet /> : <Navigate to="/" />;
 
 }

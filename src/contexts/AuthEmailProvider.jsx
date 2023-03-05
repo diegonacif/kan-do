@@ -23,13 +23,13 @@ export const AuthEmailProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   
-  console.log(registerEmail, registerPassword)
+  // console.log(user?.uid)
 
   const [userState, loading, error] = useAuthState(auth);
 
   onAuthStateChanged(auth, (currentUser) => {
     if (loading) {
-      console.log("loading user state")
+      // console.log("loading user state")
       setIsLoading(true);
     } else {
       setUser(currentUser);
@@ -102,7 +102,8 @@ export const AuthEmailProvider = ({ children }) => {
       passwordReset,
       isSignedIn,
       errorMsg,
-      isLoading
+      isLoading,
+      user
     }}>
       {children}
     </AuthEmailContext.Provider>
