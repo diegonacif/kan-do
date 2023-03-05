@@ -120,6 +120,9 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   padding: 0.75rem 0;
   font-size: 0.75rem;
 }
+.board-selector-container.light-mode {
+  background-color: transparent;
+}
 .board-selector-container svg {
   z-index: 2;
 }
@@ -137,6 +140,9 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   background-color: #24549b;
   border-radius: 0 20px 20px 0;
   z-index: 1;
+}
+.selected.light-mode {
+  color: #fafafa;
 }
 
 .header-container {
