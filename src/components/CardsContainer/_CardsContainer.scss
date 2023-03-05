@@ -28,3 +28,13 @@
     }
   }
 }
+
+.light-mode {
+  background-color: $gray-100;
+  
+  section {
+    .section-title {
+      color: $gray-900;
+    }
+  }
+}

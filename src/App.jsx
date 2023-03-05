@@ -24,7 +24,6 @@ export const App = () => {
 
   return (
     <div className="App">
-      {/* <button onClick={() => modalShow()}>modal</button> */}
       <Rodal
         visible={isModalVisible}
         onClose={() => modalHide()}

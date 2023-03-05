@@ -147,6 +147,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 }
 .header-container section svg {
   color: #aaaaaa;
+  cursor: pointer;
 }
 .header-container .rodal-container #rodal-dialog {
   padding: 0;
@@ -182,6 +183,13 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.light-mode {
+  background-color: #e0e0e0;
+}
+.light-mode section .section-title {
+  color: #21212D;
 }
 
 .kan-card-container {
