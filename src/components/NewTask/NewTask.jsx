@@ -15,7 +15,6 @@ export const NewTask = () => {
 
   const [status, setStatus] = useState('');
   const [taskContent, setTaskContent] = useState('');
-  console.log(taskContent);
 
   // New task handler
   async function handleSubmit() {
