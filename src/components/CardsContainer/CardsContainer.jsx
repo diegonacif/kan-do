@@ -8,14 +8,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import { useCollection } from "react-firebase-hooks/firestore";
 import '../../css/App.css';
 
-export const CardsContainer = () => {
+export const CardsContainer = ({ refresh }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
   const [cardsRaw, setCardsRaw] = useState();
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const cardsCollectionRef = collection(db, `${user?.uid}`);
 
-  console.log(cardsRaw);
+  console.log(refresh);
 
   // Users Data
   useEffect(() => {
@@ -24,7 +24,7 @@ export const CardsContainer = () => {
       setCardsRaw(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
     getCardsData();
-  }, [])
+  }, [refresh])
 
   // Firestore loading
   const [value, loading, error] = useCollection(cardsCollectionRef,

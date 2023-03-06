@@ -5,7 +5,7 @@ import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
 import { db } from "../../services/firebase-config";
 import { v4 as uuidv4 } from 'uuid';
 
-export const NewTask = () => {
+export const NewTask = ({ handleClose }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
 
   const [userId, setUserId] = useState('')
@@ -21,7 +21,10 @@ export const NewTask = () => {
     const docRef = doc(db, `${userId}`, `${uuidv4()}`);
     await setDoc(docRef, { status: status, taskContent: taskContent }).
     then(() => {
-      console.log(`Deu bom`)
+      console.log(`Deu bom`);
+      setStatus('');
+      setTaskContent('');
+      handleClose();
     });
   }
 
@@ -37,12 +40,14 @@ export const NewTask = () => {
         rows="5" 
         placeholder="Digite sua tarefa aqui" 
         onChange={(e) => setTaskContent(e.target.value)}
+        value={taskContent}
       />
       <select 
         name="status" 
         id="status" 
         defaultValue="A fazer"
         onChange={(e) => setStatus(e.target.value)}
+        value={status}
       >
         <option value="A fazer">A fazer</option>
         <option value="Em andamento">Em andamento</option>

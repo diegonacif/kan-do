@@ -7,7 +7,7 @@ import Rodal from 'rodal';
 import '../../css/App.css';
 import { NewTask } from "../NewTask/NewTask";
 
-export const Header = () => {
+export const Header = ({ refresh }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [newTaskShow, setNewTaskShow] = useState(false);
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
@@ -16,7 +16,12 @@ export const Header = () => {
   function handleModalHide() { setIsMenuVisible(false); }
 
   function handleOpenNewTask() { setNewTaskShow(true); }
-  function handleCloseNewTask() { setNewTaskShow(false); }
+  function handleCloseNewTask() { 
+    return (
+      setNewTaskShow(false),
+      refresh(current => !current)
+    )
+  }
 
   const modalCustomStyles = {
     height: 'fit-content',
@@ -60,7 +65,7 @@ export const Header = () => {
         showCloseButton={false}
         customStyles={modalCustomStyles}
       >
-        <NewTask />
+        <NewTask handleClose={handleCloseNewTask} />
       </Rodal>
     </div>
   )

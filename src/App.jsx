@@ -8,6 +8,7 @@ import 'rodal/lib/rodal.css';
 
 export const App = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   function modalShow() {
     setIsModalVisible(true);
@@ -15,6 +16,13 @@ export const App = () => {
 
   function modalHide() {
     setIsModalVisible(false);
+  }
+
+  function onCloseModal() {
+    return (
+      modalHide(),
+      setRefresh(current => !current)
+    )
   }
 
   const modalCustomStyles = {
@@ -26,7 +34,7 @@ export const App = () => {
     <div className="App">
       <Rodal
         visible={isModalVisible}
-        onClose={() => modalHide()}
+        onClose={() => onCloseModal()}
         className='rodal-container'
         id='rodal-dialog'
         animation='slideLeft'
@@ -42,8 +50,8 @@ export const App = () => {
         !isModalVisible &&
         <OpenModalButton modalOpen={modalShow} />
       }
-      <Header />
-      <CardsContainer />
+      <Header refresh={setRefresh} />
+      <CardsContainer refresh={refresh} />
     </div>
   )
 }
