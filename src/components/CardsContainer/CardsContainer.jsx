@@ -19,7 +19,9 @@ export const CardsContainer = ({ refresh }) => {
   const [editTaskShow, setEditTaskShow] = useState(false);
   const cardsCollectionRef = collection(db, `${user?.uid}`);
 
-  console.log(editTaskShow);
+  const [editCard, setEditCard] = useState('');
+
+  // console.log(editCard);
 
   // Users Data
   useEffect(() => {
@@ -35,6 +37,7 @@ export const CardsContainer = ({ refresh }) => {
     await deleteDoc(doc(cardsCollectionRef, cardId))
     .then(() => {
       setLocalRefresh(current => !current);
+      setEditTaskShow(false);
       console.log('Deleted card');
     })
   }
@@ -52,8 +55,13 @@ export const CardsContainer = ({ refresh }) => {
     width: 'fit-content',
   }
 
-  function handleOpenEditTask() {
+  function handleOpenEditTask(card) {
     setEditTaskShow(true);
+    setEditCard(card)
+  }
+  function handleCloseEditTask() {
+    setEditTaskShow(false);
+    setLocalRefresh(current => !current);
   }
   
   return (
@@ -72,7 +80,7 @@ export const CardsContainer = ({ refresh }) => {
                 return (
                   <div 
                     key={`div-${card.id}`}
-                    onClick={() => handleOpenEditTask()}
+                    onClick={() => handleOpenEditTask(card)}
                   >
                     <KanCard 
                       key={card.id}
@@ -104,7 +112,7 @@ export const CardsContainer = ({ refresh }) => {
       </div>
       <Rodal
         visible={editTaskShow}
-        onClose={() => setEditTaskShow(false)}
+        onClose={() => handleCloseEditTask()}
         className='rodal-container'
         id='rodal-edit-task'
         animation='zoom'
@@ -112,9 +120,10 @@ export const CardsContainer = ({ refresh }) => {
         showMask={true}
         closeMaskOnClick={true}
         showCloseButton={false}
+        closeOnEsc={true}
         customStyles={modalCustomStyles}
       >
-        <EditTask />
+        <EditTask card={editCard} deleteCard={deleteCard} />
       </Rodal>
     </div>
   )

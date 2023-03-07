@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CloudArrowUp, MinusCircle, Trash } from "phosphor-react"
 
 import '../../css/App.css';
 
-export const EditTask = () => {
+export const EditTask = ({ card, deleteCard }) => {
   const [status, setStatus] = useState('');
   const [taskContent, setTaskContent] = useState('');
+
+  console.log(card.id);
+
+  useEffect(() => {
+    setStatus(card.status);
+    setTaskContent(card.taskContent);
+  }, [card])
+
   return (
     <div className="edit-task-container">
       <header>
         <h1>Editar tarefa</h1>
         <div className="action-buttons">
-          <Trash size={36} weight="duotone" onClick={() => handleSubmit()} />
+          <Trash size={36} weight="duotone" onClick={() => deleteCard(card.id)} />
           <CloudArrowUp size={36} weight="duotone" onClick={() => handleSubmit()} />
         </div>
       </header>

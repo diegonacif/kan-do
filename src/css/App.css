@@ -264,6 +264,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   border-radius: 8px;
   padding: 1rem 0.75rem;
   font-size: 0.875rem;
+  cursor: pointer;
 }
 .kan-card-container.light-mode {
   background-color: #fafafa;
