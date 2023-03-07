@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { KanCard } from '../KanCard/KanCard';
 import { LightModeContext } from '../../contexts/LightModeProvider';
-import { Circle, MinusCircle } from 'phosphor-react';
+import { Circle } from 'phosphor-react';
 import { db } from '../../services/firebase-config';
 import { AuthEmailContext } from '../../contexts/AuthEmailProvider';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import { useCollection } from "react-firebase-hooks/firestore";
+import Rodal from 'rodal';
+import { EditTask } from '../EditTask/EditTask';
 import '../../css/App.css';
 
 export const CardsContainer = ({ refresh }) => {
@@ -14,9 +16,10 @@ export const CardsContainer = ({ refresh }) => {
   const [cardsRaw, setCardsRaw] = useState();
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const [localRefresh, setLocalRefresh] = useState(false);
+  const [editTaskShow, setEditTaskShow] = useState(false);
   const cardsCollectionRef = collection(db, `${user?.uid}`);
 
-  console.log(refresh);
+  console.log(editTaskShow);
 
   // Users Data
   useEffect(() => {
@@ -43,6 +46,15 @@ export const CardsContainer = ({ refresh }) => {
   useEffect(() => {
     setFirestoreLoading(loading);
   }, [loading])
+
+  const modalCustomStyles = {
+    height: 'fit-content',
+    width: 'fit-content',
+  }
+
+  function handleOpenEditTask() {
+    setEditTaskShow(true);
+  }
   
   return (
     <div className={`cards-container-container ${isLightMode && 'light-mode'}`}>
@@ -58,17 +70,19 @@ export const CardsContainer = ({ refresh }) => {
               null :
               cardsRaw?.map((card) => {
                 return (
-                  <KanCard 
-                    key={card.id}
-                    status={card.status}
-                    taskContent={card.taskContent}
-                  />
+                  <div 
+                    key={`div-${card.id}`}
+                    onClick={() => handleOpenEditTask()}
+                  >
+                    <KanCard 
+                      key={card.id}
+                      status={card.status}
+                      taskContent={card.taskContent}
+                    />
+                  </div>
                 )
               })
             }
-            {/* <KanCard />
-            <KanCard />
-            <KanCard /> */}
           </div>
         </section>
         <section>
@@ -77,8 +91,6 @@ export const CardsContainer = ({ refresh }) => {
             <span>DOING (4)</span>
           </div>
           <div className="cards-wrapper">
-            {/* <KanCard />
-            <KanCard /> */}
           </div>
         </section>
         <section>
@@ -87,13 +99,23 @@ export const CardsContainer = ({ refresh }) => {
             <span>DONE (4)</span>
           </div>
           <div className="cards-wrapper">
-            {/* <KanCard />
-            <KanCard />
-            <KanCard />
-            <KanCard /> */}
           </div>
         </section>
       </div>
+      <Rodal
+        visible={editTaskShow}
+        onClose={() => setEditTaskShow(false)}
+        className='rodal-container'
+        id='rodal-edit-task'
+        animation='zoom'
+        duration={300}
+        showMask={true}
+        closeMaskOnClick={true}
+        showCloseButton={false}
+        customStyles={modalCustomStyles}
+      >
+        <EditTask />
+      </Rodal>
     </div>
   )
 }

@@ -236,6 +236,17 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   flex-direction: column;
   gap: 1rem;
 }
+.cards-container-container .rodal-container #rodal-edit-task {
+  width: clamp(10rem, 90vw, 30rem) !important;
+  padding: 0;
+  margin: auto;
+  padding: 1rem;
+  background-color: #2C2C38;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #e0e0e0;
+  filter: drop-shadow(2px 2px 10px #000000);
+}
 
 .light-mode {
   background-color: #e0e0e0;
@@ -461,6 +472,38 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   border: 0;
 }
 .new-task-container select {
+  background-color: #fafafa;
+  height: 1.75rem;
+  margin-top: 1rem;
+  border-radius: 4px;
+  border: 0;
+}
+
+.edit-task-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.edit-task-container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.edit-task-container header .action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.edit-task-container header .action-buttons svg {
+  cursor: pointer;
+}
+.edit-task-container textarea {
+  margin-top: 1rem;
+  padding: 0.25rem;
+  border-radius: 4px;
+  border: 0;
+}
+.edit-task-container select {
   background-color: #fafafa;
   height: 1.75rem;
   margin-top: 1rem;
