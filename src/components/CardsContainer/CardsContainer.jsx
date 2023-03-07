@@ -6,12 +6,14 @@ import { db } from '../../services/firebase-config';
 import { AuthEmailContext } from '../../contexts/AuthEmailProvider';
 import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useCollection } from "react-firebase-hooks/firestore";
-import Rodal from 'rodal';
 import { EditTask } from '../EditTask/EditTask';
+import { ToastifyContext } from '../../contexts/ToastifyProvider';
+import Rodal from 'rodal';
 import '../../css/App.css';
 
 export const CardsContainer = ({ refresh }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
+  const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
   const [cardsRaw, setCardsRaw] = useState();
   const [firestoreLoading, setFirestoreLoading] = useState(true);
@@ -67,6 +69,7 @@ export const CardsContainer = ({ refresh }) => {
     .then(() => {
       setLocalRefresh(current => !current);
       setEditTaskShow(false);
+      notifySuccess('A tarefa foi atualizada!')
       console.log('Updated card');
     })
 
@@ -78,6 +81,7 @@ export const CardsContainer = ({ refresh }) => {
     .then(() => {
       setLocalRefresh(current => !current);
       setEditTaskShow(false);
+      notifySuccess('A tarefa foi deletada!')
       console.log('Deleted card');
     })
   }
@@ -112,7 +116,7 @@ export const CardsContainer = ({ refresh }) => {
         <section>
           <div className="section-title">
             <Circle size={13} color="#f1e585" weight="fill" />
-            <span>TODO (4)</span>
+            <span>TODO ({todoCards.length})</span>
           </div>
           <div className="cards-wrapper">
             {
@@ -138,7 +142,7 @@ export const CardsContainer = ({ refresh }) => {
         <section>
           <div className="section-title">
             <Circle size={13} color="#12a9ca" weight="fill" />
-            <span>DOING (4)</span>
+            <span>DOING ({doingCards.length})</span>
           </div>
           <div className="cards-wrapper">
           {
@@ -164,7 +168,7 @@ export const CardsContainer = ({ refresh }) => {
         <section>
           <div className="section-title">
             <Circle size={13} color="#26b89f" weight="fill" />
-            <span>DONE (4)</span>
+            <span>DONE ({doneCards.length})</span>
           </div>
           <div className="cards-wrapper">
           {
