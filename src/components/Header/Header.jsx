@@ -49,6 +49,7 @@ export const Header = ({ refresh }) => {
         showMask={true}
         closeMaskOnClick={true}
         showCloseButton={false}
+        closeOnEsc={true}
         customStyles={modalCustomStyles}
       >
         <HeaderMenu />
@@ -63,6 +64,7 @@ export const Header = ({ refresh }) => {
         showMask={true}
         closeMaskOnClick={true}
         showCloseButton={false}
+        closeOnEsc={true}
         customStyles={modalCustomStyles}
       >
         <NewTask handleClose={handleCloseNewTask} />
