@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Sidebar, OpenModalButton } from './components/Sidebar/Sidebar';
 import { Header } from './components/Header/Header';
 import { CardsContainer } from './components/CardsContainer/CardsContainer';
 import Rodal from 'rodal';
+import { ToastifyContext } from './contexts/ToastifyProvider';
+import { ToastContainer } from 'react-toastify';
 import './css/App.css';
 import 'rodal/lib/rodal.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
+  const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
@@ -52,6 +56,18 @@ export const App = () => {
       }
       <Header refresh={setRefresh} />
       <CardsContainer refresh={refresh} />
+      <ToastContainer 
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   )
 }

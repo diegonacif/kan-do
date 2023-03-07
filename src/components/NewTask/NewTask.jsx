@@ -4,9 +4,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
 import { db } from "../../services/firebase-config";
 import { v4 as uuidv4 } from 'uuid';
+import { ToastifyContext } from "../../contexts/ToastifyProvider";
 
 export const NewTask = ({ handleClose }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
+  const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
 
   const [userId, setUserId] = useState('')
   useEffect(() => {
@@ -25,6 +27,7 @@ export const NewTask = ({ handleClose }) => {
       setStatus('');
       setTaskContent('');
       handleClose();
+      notifySuccess('Tarefa criada com sucesso!');
     });
   }
 
