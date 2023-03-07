@@ -24,7 +24,7 @@ export const NewTask = ({ handleClose }) => {
     await setDoc(docRef, { status: status, taskContent: taskContent }).
     then(() => {
       console.log(`Deu bom`);
-      setStatus('');
+      setStatus('A fazer');
       setTaskContent('');
       handleClose();
       notifySuccess('Tarefa criada com sucesso!');

@@ -101,7 +101,7 @@ export const CardsContainer = ({ refresh }) => {
   }
   function handleCloseEditTask() {
     setEditTaskShow(false);
-    setStatus('');
+    setStatus('A fazer');
     setTaskContent('');
     setLocalRefresh(current => !current);
   }
