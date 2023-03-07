@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { KanCard } from '../KanCard/KanCard';
 import { LightModeContext } from '../../contexts/LightModeProvider';
-import { Circle } from 'phosphor-react';
+import { Circle, MinusCircle } from 'phosphor-react';
 import { db } from '../../services/firebase-config';
 import { AuthEmailContext } from '../../contexts/AuthEmailProvider';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import { useCollection } from "react-firebase-hooks/firestore";
 import '../../css/App.css';
 
@@ -13,6 +13,7 @@ export const CardsContainer = ({ refresh }) => {
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
   const [cardsRaw, setCardsRaw] = useState();
   const [firestoreLoading, setFirestoreLoading] = useState(true);
+  const [localRefresh, setLocalRefresh] = useState(false);
   const cardsCollectionRef = collection(db, `${user?.uid}`);
 
   console.log(refresh);
@@ -24,7 +25,16 @@ export const CardsContainer = ({ refresh }) => {
       setCardsRaw(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
     getCardsData();
-  }, [refresh])
+  }, [refresh, localRefresh])
+
+  // Delete card
+  const deleteCard = async (cardId) => {
+    await deleteDoc(doc(cardsCollectionRef, cardId))
+    .then(() => {
+      setLocalRefresh(current => !current);
+      console.log('Deleted card');
+    })
+  }
 
   // Firestore loading
   const [value, loading, error] = useCollection(cardsCollectionRef,
