@@ -4,7 +4,7 @@ import { LightModeContext } from '../../contexts/LightModeProvider';
 import { Circle } from 'phosphor-react';
 import { db } from '../../services/firebase-config';
 import { AuthEmailContext } from '../../contexts/AuthEmailProvider';
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { useCollection } from "react-firebase-hooks/firestore";
 import Rodal from 'rodal';
 import { EditTask } from '../EditTask/EditTask';
@@ -20,8 +20,8 @@ export const CardsContainer = ({ refresh }) => {
   const cardsCollectionRef = collection(db, `${user?.uid}`);
 
   const [editCard, setEditCard] = useState('');
-
-  // console.log(editCard);
+  const [status, setStatus] = useState('');
+  const [taskContent, setTaskContent] = useState('');
 
   // Users Data
   useEffect(() => {
@@ -31,6 +31,22 @@ export const CardsContainer = ({ refresh }) => {
     }
     getCardsData();
   }, [refresh, localRefresh])
+
+  // Update Card
+  const updateCard = async (cardId) => {
+    const docRef = doc(db, `${user?.uid}`, cardId)
+
+    await updateDoc(docRef, {
+      status: status,
+      taskContent: taskContent
+    })
+    .then(() => {
+      setLocalRefresh(current => !current);
+      setEditTaskShow(false);
+      console.log('Updated card');
+    })
+
+  }
 
   // Delete card
   const deleteCard = async (cardId) => {
@@ -61,6 +77,8 @@ export const CardsContainer = ({ refresh }) => {
   }
   function handleCloseEditTask() {
     setEditTaskShow(false);
+    setStatus('');
+    setTaskContent('');
     setLocalRefresh(current => !current);
   }
   
@@ -123,7 +141,13 @@ export const CardsContainer = ({ refresh }) => {
         closeOnEsc={true}
         customStyles={modalCustomStyles}
       >
-        <EditTask card={editCard} deleteCard={deleteCard} />
+        <EditTask 
+          card={editCard} 
+          deleteCard={deleteCard} 
+          currentStatus={setStatus}
+          currentTaskContent={setTaskContent}
+          updateCard={updateCard}
+        />
       </Rodal>
     </div>
   )

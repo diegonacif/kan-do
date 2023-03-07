@@ -3,11 +3,21 @@ import { CloudArrowUp, MinusCircle, Trash } from "phosphor-react"
 
 import '../../css/App.css';
 
-export const EditTask = ({ card, deleteCard }) => {
+export const EditTask = ({ 
+  card, 
+  deleteCard, 
+  updateCard,
+  currentStatus, 
+  currentTaskContent 
+}) => {
+
   const [status, setStatus] = useState('');
   const [taskContent, setTaskContent] = useState('');
 
-  console.log(card.id);
+  useEffect(() => {
+    currentStatus(status);
+    currentTaskContent(taskContent);
+  }, [status, taskContent])
 
   useEffect(() => {
     setStatus(card.status);
@@ -20,7 +30,7 @@ export const EditTask = ({ card, deleteCard }) => {
         <h1>Editar tarefa</h1>
         <div className="action-buttons">
           <Trash size={36} weight="duotone" onClick={() => deleteCard(card.id)} />
-          <CloudArrowUp size={36} weight="duotone" onClick={() => handleSubmit()} />
+          <CloudArrowUp size={36} weight="duotone" onClick={() => updateCard(card.id)} />
         </div>
       </header>
       <textarea 
