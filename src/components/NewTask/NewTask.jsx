@@ -13,7 +13,7 @@ export const NewTask = ({ handleClose }) => {
     setUserId(user?.uid)
   }, [])
 
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('A fazer');
   const [taskContent, setTaskContent] = useState('');
 
   // New task handler

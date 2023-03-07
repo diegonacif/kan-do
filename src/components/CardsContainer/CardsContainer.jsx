@@ -23,6 +23,30 @@ export const CardsContainer = ({ refresh }) => {
   const [status, setStatus] = useState('');
   const [taskContent, setTaskContent] = useState('');
 
+
+  // Todo Cards
+  const [todoCards, setTodoCards] = useState([]);
+  useEffect(() => {
+    const cards = cardsRaw?.filter(cards => cards.status === "A fazer");
+    setTodoCards(cards);
+  }, [cardsRaw])
+
+  // Doing Cards
+  const [doingCards, setDoingCards] = useState([]);
+  useEffect(() => {
+    const cards = cardsRaw?.filter(cards => cards.status === "Em andamento");
+    setDoingCards(cards);
+  }, [cardsRaw])
+
+  // Done Cards
+  const [doneCards, setDoneCards] = useState([]);
+  useEffect(() => {
+    const cards = cardsRaw?.filter(cards => cards.status === "Feito");
+    setDoneCards(cards);
+  }, [cardsRaw])
+
+
+
   // Users Data
   useEffect(() => {
     const getCardsData = async () => {
@@ -94,7 +118,7 @@ export const CardsContainer = ({ refresh }) => {
             {
               firestoreLoading ?
               null :
-              cardsRaw?.map((card) => {
+              todoCards?.map((card) => {
                 return (
                   <div 
                     key={`div-${card.id}`}
@@ -117,6 +141,24 @@ export const CardsContainer = ({ refresh }) => {
             <span>DOING (4)</span>
           </div>
           <div className="cards-wrapper">
+          {
+              firestoreLoading ?
+              null :
+              doingCards?.map((card) => {
+                return (
+                  <div 
+                    key={`div-${card.id}`}
+                    onClick={() => handleOpenEditTask(card)}
+                  >
+                    <KanCard 
+                      key={card.id}
+                      status={card.status}
+                      taskContent={card.taskContent}
+                    />
+                  </div>
+                )
+              })
+            }
           </div>
         </section>
         <section>
@@ -125,6 +167,24 @@ export const CardsContainer = ({ refresh }) => {
             <span>DONE (4)</span>
           </div>
           <div className="cards-wrapper">
+          {
+              firestoreLoading ?
+              null :
+              doneCards?.map((card) => {
+                return (
+                  <div 
+                    key={`div-${card.id}`}
+                    onClick={() => handleOpenEditTask(card)}
+                  >
+                    <KanCard 
+                      key={card.id}
+                      status={card.status}
+                      taskContent={card.taskContent}
+                    />
+                  </div>
+                )
+              })
+            }
           </div>
         </section>
       </div>
