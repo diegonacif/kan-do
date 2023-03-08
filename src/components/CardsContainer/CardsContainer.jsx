@@ -117,8 +117,10 @@ export const CardsContainer = ({ refresh }) => {
       <div className="cards-container-wrapper">
         <section>
           <div className="section-title">
-            <Circle size={13} color="#f1e585" weight="fill" />
-            <span>TODO ({todoCards?.length})</span>
+            <div className="section-title-content" id="title-todo">
+              <Circle size={13} color="#f1e585" weight="fill" />
+              <span>À FAZER ({todoCards?.length})</span>
+            </div>
           </div>
           <div className="cards-wrapper">
             {
@@ -143,8 +145,10 @@ export const CardsContainer = ({ refresh }) => {
         </section>
         <section>
           <div className="section-title">
-            <Circle size={13} color="#12a9ca" weight="fill" />
-            <span>DOING ({doingCards?.length})</span>
+            <div className="section-title-content" id="title-doing">
+              <Circle size={13} color="#12a9ca" weight="fill" />
+              <span>FAZENDO ({doingCards?.length})</span>
+            </div>
           </div>
           <div className="cards-wrapper">
           {
@@ -169,8 +173,10 @@ export const CardsContainer = ({ refresh }) => {
         </section>
         <section>
           <div className="section-title">
-            <Circle size={13} color="#26b89f" weight="fill" />
-            <span>DONE ({doneCards?.length})</span>
+            <div className="section-title-content" id="title-done">
+              <Circle size={13} color="#26b89f" weight="fill" />
+              <span>FEITO ({doneCards?.length})</span>
+            </div>
           </div>
           <div className="cards-wrapper">
           {

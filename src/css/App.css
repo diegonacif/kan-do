@@ -262,10 +262,26 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   padding: 0.75rem 0;
   color: #fafafa;
 }
-.cards-container-container section .section-title span {
+.cards-container-container section .section-title .section-title-content {
+  display: flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+}
+.cards-container-container section .section-title .section-title-content span {
   color: #aaaaaa;
   font-size: 0.6875rem;
   margin-left: 0.5rem;
+  font-weight: 500;
+}
+.cards-container-container section .section-title .section-title-content#title-todo {
+  background-color: rgb(61, 61, 23);
+}
+.cards-container-container section .section-title .section-title-content#title-doing {
+  background-color: rgb(21, 58, 73);
+}
+.cards-container-container section .section-title .section-title-content#title-done {
+  background-color: #183f38;
 }
 .cards-container-container section .cards-wrapper {
   display: flex;
