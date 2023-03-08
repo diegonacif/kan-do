@@ -10,19 +10,17 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { PlusCircle } from 'phosphor-react';
 import { ToastifyContext } from '../../contexts/ToastifyProvider';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { SelectedBoardContext } from '../../contexts/SelectedBoardProvider';
 
 export const Sidebar = ({ modalHide }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
+  const boardsCollectionRef = collection(db, `${user?.uid}`);
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
   const { selectedBoard, setSelectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
-  const boardsCollectionRef = collection(db, `${user?.uid}`);
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const [newBoardName, setNewBoardName] = useState('');
   const [localRefresh, setLocalRefresh] = useState(false);
-  // const [selectedBoard, setSelectedBoard] = useLocalStorage("selectedBoard", '')
 
   const [rawBoards, setRawBoards] = useState([]);
 
@@ -45,8 +43,9 @@ export const Sidebar = ({ modalHide }) => {
 
   // New Board Handler
   async function handleNewBoard() {
-    const docRef = doc(db, `${user?.uid}`, `board-${uuidv4()}`);
-    await setDoc(docRef, {boardName: newBoardName, uid: `board-${uuidv4()}`}).
+    const uid = `board-${uuidv4()}`
+    const docRef = doc(db, `${user?.uid}`, uid);
+    await setDoc(docRef, {boardName: newBoardName, uid: uid}).
     then(() => {
       setLocalRefresh(current => !current);
       console.log('Quadro criado com sucesso!');
