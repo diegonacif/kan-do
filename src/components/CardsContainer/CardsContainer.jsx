@@ -19,7 +19,7 @@ export const CardsContainer = ({ refresh }) => {
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const [localRefresh, setLocalRefresh] = useState(false);
   const [editTaskShow, setEditTaskShow] = useState(false);
-  const cardsCollectionRef = collection(db, `${user?.uid}`);
+  const cardsCollectionRef = collection(db, `${user?.uid}`, ``);
 
   const [editCard, setEditCard] = useState('');
   const [status, setStatus] = useState('');
@@ -116,7 +116,7 @@ export const CardsContainer = ({ refresh }) => {
         <section>
           <div className="section-title">
             <Circle size={13} color="#f1e585" weight="fill" />
-            <span>TODO ({todoCards.length})</span>
+            <span>TODO ({todoCards?.length})</span>
           </div>
           <div className="cards-wrapper">
             {
@@ -142,7 +142,7 @@ export const CardsContainer = ({ refresh }) => {
         <section>
           <div className="section-title">
             <Circle size={13} color="#12a9ca" weight="fill" />
-            <span>DOING ({doingCards.length})</span>
+            <span>DOING ({doingCards?.length})</span>
           </div>
           <div className="cards-wrapper">
           {
@@ -168,7 +168,7 @@ export const CardsContainer = ({ refresh }) => {
         <section>
           <div className="section-title">
             <Circle size={13} color="#26b89f" weight="fill" />
-            <span>DONE ({doneCards.length})</span>
+            <span>DONE ({doneCards?.length})</span>
           </div>
           <div className="cards-wrapper">
           {

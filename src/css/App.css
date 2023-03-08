@@ -78,6 +78,11 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   font-size: 0.6825rem;
   color: #aaaaaa;
 }
+.sidebar-container main .new-board-input-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
 .sidebar-container.light-mode {
   background-color: #fafafa;
   color: #21212D;
@@ -119,6 +124,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   gap: 0.5rem;
   padding: 0.75rem 0;
   font-size: 0.75rem;
+  cursor: pointer;
 }
 .board-selector-container.light-mode {
   background-color: transparent;

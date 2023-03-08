@@ -10,17 +10,12 @@ export const NewTask = ({ handleClose }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
 
-  const [userId, setUserId] = useState('')
-  useEffect(() => {
-    setUserId(user?.uid)
-  }, [])
-
   const [status, setStatus] = useState('A fazer');
   const [taskContent, setTaskContent] = useState('');
 
   // New task handler
   async function handleSubmit() {
-    const docRef = doc(db, `${userId}`, `${uuidv4()}`);
+    const docRef = doc(db, `${user?.uid}`, `${uuidv4()}`);
     await setDoc(docRef, { status: status, taskContent: taskContent }).
     then(() => {
       console.log(`Deu bom`);

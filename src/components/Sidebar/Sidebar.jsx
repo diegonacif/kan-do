@@ -1,11 +1,57 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { LightModeContext } from '../../contexts/LightModeProvider';
 import { BoardSelector } from '../BoardSelector/BoardSelector';
 import { LightModeButton } from '../LightModeButton/LightModeButton';
 import '../../css/App.css';
+import { db } from '../../services/firebase-config';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { AuthEmailContext } from '../../contexts/AuthEmailProvider';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { v4 as uuidv4 } from 'uuid';
+import { PlusCircle } from 'phosphor-react';
+import { ToastifyContext } from '../../contexts/ToastifyProvider';
 
 export const Sidebar = ({ modalHide }) => {
+  const { user } = useContext(AuthEmailContext); // Email Context
+  const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+  const boardsCollectionRef = collection(db, `${user?.uid}`);
+  const [firestoreLoading, setFirestoreLoading] = useState(true);
+  const [newBoardName, setNewBoardName] = useState('');
+  const [localRefresh, setLocalRefresh] = useState(false);
+  const [selectedBoard, setSelectedBoard] = useState('');
+
+  const [rawBoards, setRawBoards] = useState([]);
+
+  console.log(selectedBoard);
+
+  // Firestore loading
+  const [value, loading, error] = useCollection(boardsCollectionRef,
+    { snapshotListenOptions: { includeMetadataChanges: true } }
+  );
+  useEffect(() => {
+    setFirestoreLoading(loading);
+  }, [loading])
+
+  // Boards Data
+  useEffect(() => {
+    const getBoardsData = async () => {
+      const data = await getDocs(boardsCollectionRef);
+      setRawBoards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+    getBoardsData();
+  }, [localRefresh])
+
+  // New Board Handler
+  async function handleNewBoard() {
+    const docRef = doc(db, `${user?.uid}`, `board-${uuidv4()}`);
+    await setDoc(docRef, {boardName: newBoardName, uid: `board-${uuidv4()}`}).
+    then(() => {
+      setLocalRefresh(current => !current);
+      console.log('Quadro criado com sucesso!');
+      notifySuccess('Quadro criado com sucesso!');
+    });
+  }
 
   return (
     <div className={`sidebar-container ${isLightMode && 'light-mode'}`}>
@@ -14,12 +60,23 @@ export const Sidebar = ({ modalHide }) => {
         <LightModeButton />
       </header>
       <main>
-        <h5>MEUS QUADROS (8)</h5>
-        <BoardSelector />
-        <BoardSelector />
+        <h5>MEUS QUADROS ({rawBoards?.length})</h5>
+        {
+          firestoreLoading ?
+          null :
+          rawBoards.map((board) => {
+            return (
+              <div className="board-selector-wrapper" onClick={() => setSelectedBoard(board.uid)}>
+                <BoardSelector board={board} />
+              </div>
+            )
+          })
+        }
         <BoardSelector selected />
-        <BoardSelector />
-        <BoardSelector />
+        <div className="new-board-input-wrapper">
+          <PlusCircle size={30} weight="fill" onClick={() => handleNewBoard()} />
+          <input type="text" onChange={(e) => setNewBoardName(e.target.value)} />
+        </div>
       </main>
       <button onClick={() => modalHide()}>&lt;</button>
     </div>

@@ -43,6 +43,12 @@
       font-size: 0.6825rem;
       color: $gray-400;
     }
+
+    .new-board-input-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 1rem;
+    }
   }
 
   &.light-mode {
