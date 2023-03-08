@@ -9,24 +9,27 @@ import { App } from './App'
 import { Login } from './components/Login/Login';
 import { AuthEmailProvider } from './contexts/AuthEmailProvider';
 import { LightModeProvider } from './contexts/LightModeProvider';
+import { SelectedBoardProvider } from './contexts/SelectedBoardProvider';
 import { ToastifyProvider } from './contexts/ToastifyProvider';
 import { PrivateRoutes } from './PrivateRoutes';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthEmailProvider>
-      <ToastifyProvider>
-        <LightModeProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route element={<PrivateRoutes />}>
-                <Route path="/home" element={<App />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </LightModeProvider>
-      </ToastifyProvider>
+      <SelectedBoardProvider>
+        <ToastifyProvider>
+          <LightModeProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route element={<PrivateRoutes />}>
+                  <Route path="/home" element={<App />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </LightModeProvider>
+        </ToastifyProvider>
+      </SelectedBoardProvider>
     </AuthEmailProvider>
   </React.StrictMode>
 )

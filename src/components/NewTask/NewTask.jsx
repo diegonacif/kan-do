@@ -5,19 +5,20 @@ import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
 import { db } from "../../services/firebase-config";
 import { v4 as uuidv4 } from 'uuid';
 import { ToastifyContext } from "../../contexts/ToastifyProvider";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export const NewTask = ({ handleClose }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
-
+  
   const [status, setStatus] = useState('A fazer');
   const [taskContent, setTaskContent] = useState('');
 
   // New task handler
   async function handleSubmit() {
     const docRef = doc(db, `${user?.uid}`, `${uuidv4()}`);
-    await setDoc(docRef, { status: status, taskContent: taskContent }).
-    then(() => {
+    await setDoc(docRef, { status: status, taskContent: taskContent })
+    .then(() => {
       console.log(`Deu bom`);
       setStatus('A fazer');
       setTaskContent('');

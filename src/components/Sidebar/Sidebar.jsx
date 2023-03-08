@@ -10,20 +10,21 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { PlusCircle } from 'phosphor-react';
 import { ToastifyContext } from '../../contexts/ToastifyProvider';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import { SelectedBoardContext } from '../../contexts/SelectedBoardProvider';
 
 export const Sidebar = ({ modalHide }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+  const { selectedBoard, setSelectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
   const boardsCollectionRef = collection(db, `${user?.uid}`);
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const [newBoardName, setNewBoardName] = useState('');
   const [localRefresh, setLocalRefresh] = useState(false);
-  const [selectedBoard, setSelectedBoard] = useState('');
+  // const [selectedBoard, setSelectedBoard] = useLocalStorage("selectedBoard", '')
 
   const [rawBoards, setRawBoards] = useState([]);
-
-  console.log(selectedBoard);
 
   // Firestore loading
   const [value, loading, error] = useCollection(boardsCollectionRef,
@@ -67,12 +68,12 @@ export const Sidebar = ({ modalHide }) => {
           rawBoards.map((board) => {
             return (
               <div className="board-selector-wrapper" onClick={() => setSelectedBoard(board.uid)}>
-                <BoardSelector board={board} />
+                <BoardSelector board={board} selected={board.uid === selectedBoard} />
               </div>
             )
           })
         }
-        <BoardSelector selected />
+        {/* <BoardSelector selected /> */}
         <div className="new-board-input-wrapper">
           <PlusCircle size={30} weight="fill" onClick={() => handleNewBoard()} />
           <input type="text" onChange={(e) => setNewBoardName(e.target.value)} />
