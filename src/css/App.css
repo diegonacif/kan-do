@@ -318,6 +318,11 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 .light-mode section .section-title .section-title-content#title-done {
   background-color: #d8fff8;
 }
+.light-mode .rodal-container #rodal-edit-task {
+  background-color: #e0e0e0;
+  color: #21212D;
+  filter: drop-shadow(2px 2px 10px #000000);
+}
 
 .kan-card-container {
   color: #fafafa;

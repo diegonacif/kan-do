@@ -95,4 +95,12 @@
 
     }
   }
+
+  .rodal-container {
+    #rodal-edit-task {
+      background-color: $gray-100;
+      color: $gray-900;
+      filter: drop-shadow(2px 2px 10px #000000);
+    }
+  }
 }

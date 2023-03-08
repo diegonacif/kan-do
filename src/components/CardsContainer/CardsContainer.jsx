@@ -131,7 +131,7 @@ export const CardsContainer = ({ refresh }) => {
                   <div 
                     key={`div-${card.id}`}
                     onClick={() => handleOpenEditTask(card)}
-                  >
+                  >2
                     <KanCard 
                       key={card.id}
                       status={card.status}
