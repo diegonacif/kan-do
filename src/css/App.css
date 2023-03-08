@@ -569,6 +569,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   padding: 0.25rem;
   border-radius: 4px;
   border: 0;
+  resize: none;
 }
 .edit-task-container select {
   background-color: #fafafa;
@@ -576,6 +577,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   margin-top: 1rem;
   border-radius: 4px;
   border: 0;
+  padding: 0 0.25rem;
 }
 
 .rodal-container #rodal-dialog {
