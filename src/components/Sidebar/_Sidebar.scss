@@ -88,7 +88,6 @@
         width: 12rem;
         padding: 0 0.5rem;
       }
-
     }
   }
 
@@ -104,6 +103,17 @@
     button {
       background-color: $gray-100;
       color: $gray-900;
+    }
+
+    .rodal-container {
+      #rodal-new-board {
+        background-color: $gray-200;
+        color: $gray-900;
+      }
+
+      h3 {
+        font-weight: 500;
+      }
     }
   }
 }

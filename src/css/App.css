@@ -125,6 +125,13 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   background-color: #e0e0e0;
   color: #21212D;
 }
+.sidebar-container.light-mode .rodal-container #rodal-new-board {
+  background-color: #cecece;
+  color: #21212D;
+}
+.sidebar-container.light-mode .rodal-container h3 {
+  font-weight: 500;
+}
 
 .open-modal-button-container button {
   position: absolute;
