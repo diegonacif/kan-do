@@ -62,7 +62,7 @@ export const CardsContainer = ({ refresh }) => {
 
   // Update Card
   const updateCard = async (cardId) => {
-    const docRef = doc(db, `${user?.uid}`, cardId)
+    const docRef = doc(db, `${user?.uid}`, selectedBoard, 'tasks', cardId)
 
     await updateDoc(docRef, {
       status: status,
