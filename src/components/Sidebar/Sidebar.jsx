@@ -114,7 +114,7 @@ export const Sidebar = ({ modalHide }) => {
           <h3>Criar novo quadro</h3>
           <PlusCircle size={32} weight="fill" onClick={() => handleNewBoard()} />
         </div>
-        <input type="text" onChange={(e) => setNewBoardName(e.target.value)} />
+        <input type="text" placeholder="Nome do quadro" onChange={(e) => setNewBoardName(e.target.value)} />
       </Rodal>
       <button onClick={() => modalHide()}>&lt;</button>
     </div>

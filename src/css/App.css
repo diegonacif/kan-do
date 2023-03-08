@@ -507,6 +507,7 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   padding: 0.25rem;
   border-radius: 4px;
   border: 0;
+  resize: none;
 }
 .new-task-container select {
   background-color: #fafafa;
