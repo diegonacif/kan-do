@@ -17,7 +17,7 @@ export const Sidebar = ({ modalHide }) => {
   const boardsCollectionRef = collection(db, `${user?.uid}`);
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
-  const { selectedBoard, setSelectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
+  const { selectedBoard, setSelectedBoard, setSelectedBoardName } = useContext(SelectedBoardContext); // Selected Board Context
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const [newBoardName, setNewBoardName] = useState('');
   const [localRefresh, setLocalRefresh] = useState(false);
@@ -53,6 +53,11 @@ export const Sidebar = ({ modalHide }) => {
     });
   }
 
+  function handleCurrentBoard(board) {
+    setSelectedBoard(board.uid)
+    setSelectedBoardName(board.boardName)
+  }
+
   return (
     <div className={`sidebar-container ${isLightMode && 'light-mode'}`}>
       <header>
@@ -66,7 +71,7 @@ export const Sidebar = ({ modalHide }) => {
           null :
           rawBoards.map((board) => {
             return (
-              <div className="board-selector-wrapper" onClick={() => setSelectedBoard(board.uid)}>
+              <div className="board-selector-wrapper" onClick={() => handleCurrentBoard(board)}>
                 <BoardSelector board={board} selected={board.uid === selectedBoard} />
               </div>
             )

@@ -1,16 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DotsThreeOutlineVertical } from "phosphor-react"
 import { HeaderMenu } from "../HeaderMenu/HeaderMenu";
 import { LightModeContext } from '../../contexts/LightModeProvider';
 import Rodal from 'rodal';
+import { NewTask } from "../NewTask/NewTask";
+import { db } from "../../services/firebase-config";
+import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
+import { SelectedBoardContext } from "../../contexts/SelectedBoardProvider";
+import { collection, getDocs } from "firebase/firestore";
 
 import '../../css/App.css';
-import { NewTask } from "../NewTask/NewTask";
 
 export const Header = ({ refresh }) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [newTaskShow, setNewTaskShow] = useState(false);
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+  const { selectedBoardName } = useContext(SelectedBoardContext); // Selected Board Context
+  const [rawBoards, setRawBoards] = useState([]);
+
+  console.log(rawBoards);
 
   function handleMenuShow() { setIsMenuVisible(true); }
   function handleModalHide() { setIsMenuVisible(false); }
@@ -27,10 +35,10 @@ export const Header = ({ refresh }) => {
     height: 'fit-content',
     width: 'fit-content',
   }
-
+  
   return (
     <div className={`header-container ${isLightMode && 'light-mode'}`}>
-      <h3>Nome do quadro</h3>
+      <h3>{selectedBoardName}</h3>
       <section>
         <button onClick={() => handleOpenNewTask()}>Adicionar nova tarefa</button>
         <DotsThreeOutlineVertical
