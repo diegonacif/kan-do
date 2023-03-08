@@ -475,10 +475,9 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 
 .header-menu-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
   background-color: #2C2C38;
-}
-.header-menu-container span {
   cursor: pointer;
 }
 .header-menu-container.light-mode {

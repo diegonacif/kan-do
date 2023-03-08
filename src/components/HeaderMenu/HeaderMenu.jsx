@@ -1,3 +1,4 @@
+import { SignOut } from "phosphor-react";
 import { useContext } from "react";
 import { AuthEmailContext } from "../../contexts/AuthEmailProvider";
 import { LightModeContext } from "../../contexts/LightModeProvider";
@@ -16,6 +17,7 @@ export const HeaderMenu = () => {
 
   return (
     <div className={`header-menu-container ${isLightMode && 'light-mode'}`}>
+      <SignOut size={28} weight="duotone" />
       <span onClick={() => logoutUser()}>Logout</span>
     </div>
   )
