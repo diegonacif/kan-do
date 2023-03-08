@@ -8,9 +8,11 @@ import { ToastContainer } from 'react-toastify';
 import './css/App.css';
 import 'rodal/lib/rodal.css';
 import 'react-toastify/dist/ReactToastify.css';
+import { SelectedBoardContext } from './contexts/SelectedBoardProvider';
 
 export const App = () => {
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
+  const { selectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
@@ -55,7 +57,13 @@ export const App = () => {
         <OpenModalButton modalOpen={modalShow} />
       }
       <Header refresh={setRefresh} />
-      <CardsContainer refresh={refresh} />
+      {
+        selectedBoard ? 
+        <CardsContainer refresh={refresh} /> :
+        <div className="nothing-to-display">
+          <h1>Selecione um quadro</h1>
+        </div>
+      }
       <ToastContainer 
         position="bottom-right"
         autoClose={5000}

@@ -5,3 +5,12 @@
       margin: 0;
     }
   }
+
+  .nothing-to-display {
+    display: flex;
+    justify-content: center;
+    height: calc(100vh - 4.5rem);
+    background-color: $gray-900;
+    color: $white;
+    padding-top: 4rem;
+  }

@@ -18,8 +18,6 @@ export const Header = ({ refresh }) => {
   const { selectedBoardName } = useContext(SelectedBoardContext); // Selected Board Context
   const [rawBoards, setRawBoards] = useState([]);
 
-  console.log(rawBoards);
-
   function handleMenuShow() { setIsMenuVisible(true); }
   function handleModalHide() { setIsMenuVisible(false); }
 
@@ -38,7 +36,7 @@ export const Header = ({ refresh }) => {
   
   return (
     <div className={`header-container ${isLightMode && 'light-mode'}`}>
-      <h3>{selectedBoardName}</h3>
+      <h3>{selectedBoardName ? selectedBoardName : 'Kan-Do'}</h3>
       <section>
         <button onClick={() => handleOpenNewTask()}>Adicionar nova tarefa</button>
         <DotsThreeOutlineVertical

@@ -71,7 +71,11 @@ export const Sidebar = ({ modalHide }) => {
           null :
           rawBoards.map((board) => {
             return (
-              <div className="board-selector-wrapper" onClick={() => handleCurrentBoard(board)}>
+              <div 
+                className="board-selector-wrapper" 
+                onClick={() => handleCurrentBoard(board)}
+                key={`board-selector-${board.uid}`}
+              >
                 <BoardSelector board={board} selected={board.uid === selectedBoard} />
               </div>
             )
