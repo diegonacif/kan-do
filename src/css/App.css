@@ -69,19 +69,49 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   background-color: #21212D;
 }
 .sidebar-container main {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 1rem;
 }
-.sidebar-container main h5 {
+.sidebar-container main .main-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar-container main .main-title-wrapper h5 {
   padding: 0.75rem 0;
   font-size: 0.6825rem;
   color: #aaaaaa;
 }
-.sidebar-container main .new-board-input-wrapper {
+.sidebar-container main .main-title-wrapper .new-board-input-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
+  color: #cecece;
+  cursor: pointer;
+}
+.sidebar-container .rodal-container #rodal-new-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: #2C2C38;
+  color: #fafafa;
+  border-radius: 4px;
+  padding: 1.25rem 1rem;
+}
+.sidebar-container .rodal-container #rodal-new-board .rodal-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sidebar-container .rodal-container #rodal-new-board .rodal-row svg {
+  cursor: pointer;
+}
+.sidebar-container .rodal-container #rodal-new-board input {
+  height: 2rem;
+  width: 12rem;
+  padding: 0 0.5rem;
 }
 .sidebar-container.light-mode {
   background-color: #fafafa;
