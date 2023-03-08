@@ -306,8 +306,17 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 .light-mode section .section-title {
   color: #21212D;
 }
-.light-mode section .section-title span {
+.light-mode section .section-title .section-title-content span {
   color: #2C2C38;
+}
+.light-mode section .section-title .section-title-content#title-todo {
+  background-color: rgb(255, 254, 222);
+}
+.light-mode section .section-title .section-title-content#title-doing {
+  background-color: rgb(220, 245, 255);
+}
+.light-mode section .section-title .section-title-content#title-done {
+  background-color: #d8fff8;
 }
 
 .kan-card-container {

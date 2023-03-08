@@ -76,9 +76,23 @@
     .section-title {
       color: $gray-900;
 
-      span {
-        color: $gray-800;
+      .section-title-content {
+
+        span {
+          color: $gray-800;
+        }
+
+        &#title-todo {
+          background-color: rgb(255, 254, 222);
+        }
+        &#title-doing {
+          background-color: rgb(220, 245, 255);
+        }
+        &#title-done {
+          background-color: #d8fff8;
+        }
       }
+
     }
   }
 }
