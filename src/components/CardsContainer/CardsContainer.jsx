@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { KanCard } from '../KanCard/KanCard';
 import { LightModeContext } from '../../contexts/LightModeProvider';
+import { SelectedBoardContext } from "../../contexts/SelectedBoardProvider";
 import { Circle } from 'phosphor-react';
 import { db } from '../../services/firebase-config';
 import { AuthEmailContext } from '../../contexts/AuthEmailProvider';
@@ -15,11 +16,12 @@ export const CardsContainer = ({ refresh }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
   const { isLightMode } = useContext(LightModeContext); // Light Mode Context
+  const { selectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
   const [cardsRaw, setCardsRaw] = useState();
   const [firestoreLoading, setFirestoreLoading] = useState(true);
   const [localRefresh, setLocalRefresh] = useState(false);
   const [editTaskShow, setEditTaskShow] = useState(false);
-  const cardsCollectionRef = collection(db, `${user?.uid}`, ``);
+  const cardsCollectionRef = collection(db, `${user?.uid}`, selectedBoard, 'tasks');
 
   const [editCard, setEditCard] = useState('');
   const [status, setStatus] = useState('');
@@ -56,7 +58,7 @@ export const CardsContainer = ({ refresh }) => {
       setCardsRaw(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
     getCardsData();
-  }, [refresh, localRefresh])
+  }, [refresh, localRefresh, selectedBoard])
 
   // Update Card
   const updateCard = async (cardId) => {

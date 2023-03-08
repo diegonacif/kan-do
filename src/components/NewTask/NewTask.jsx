@@ -10,7 +10,7 @@ import { SelectedBoardContext } from "../../contexts/SelectedBoardProvider";
 export const NewTask = ({ handleClose }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
-  const { selectedBoard, setSelectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
+  const { selectedBoard } = useContext(SelectedBoardContext); // Selected Board Context
   
   const [status, setStatus] = useState('A fazer');
   const [taskContent, setTaskContent] = useState('');
