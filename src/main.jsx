@@ -15,21 +15,21 @@ import { PrivateRoutes } from './PrivateRoutes';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthEmailProvider>
-      <SelectedBoardProvider>
-        <ToastifyProvider>
-          <LightModeProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Login />} />
-                <Route element={<PrivateRoutes />}>
-                  <Route path="/home" element={<App />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </LightModeProvider>
-        </ToastifyProvider>
-      </SelectedBoardProvider>
-    </AuthEmailProvider>
+    <ToastifyProvider>
+      <AuthEmailProvider>
+        <SelectedBoardProvider>
+            <LightModeProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Login />} />
+                  <Route element={<PrivateRoutes />}>
+                    <Route path="/home" element={<App />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </LightModeProvider>
+        </SelectedBoardProvider>
+      </AuthEmailProvider>
+    </ToastifyProvider>
   </React.StrictMode>
 )

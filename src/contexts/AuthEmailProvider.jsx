@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { 
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -8,6 +8,7 @@ import {
   } from 'firebase/auth'
 import { auth } from '../services/firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { ToastifyContext } from "./ToastifyProvider";
 
 export const AuthEmailContext = createContext({});
 
@@ -22,8 +23,8 @@ export const AuthEmailProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-  
-  // console.log(user?.uid)
+
+  const { notifySuccess, notifyError } = useContext(ToastifyContext); // Toastify Context
 
   const [userState, loading, error] = useAuthState(auth);
 
@@ -46,8 +47,10 @@ export const AuthEmailProvider = ({ children }) => {
         registerPassword
       );
       console.log(user);
+      notifySuccess('Usuário registrado com sucesso!')
     } catch (error) {
       console.log(error.message);
+      notifyError('Erro ao registrar')
     }
   }
   const loginUser = async () => {
@@ -57,21 +60,21 @@ export const AuthEmailProvider = ({ children }) => {
         loginEmail, 
         loginPassword
       );
-      // setUserMail(user?.user.email);
-      // setAccessToken(user?.user.accessToken);
-      // console.log({email: user?.user.email, accessToken: user?.user.accessToken});
       console.log("logged in");
-
+      notifySuccess('Você está logado!');
     } catch (error) {
       console.log(error.message);
+      notifyError(`${error.message}`)
     }
   }
   const logoutUser = async () => {
     try {
       await signOut(auth);
       console.log(user);
+      notifySuccess('Você está deslogado!')
     } catch (error) {
       console.error(error.message);
+      notifyError(`${error.message}`)
     }
   }
 
@@ -79,11 +82,13 @@ export const AuthEmailProvider = ({ children }) => {
     sendPasswordResetEmail(auth, loginReset)
       .then(() => {
         console.log("password reset sent");
+        notifySuccess('Reset enviado para seu email!')
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.error({ "errorCode": errorCode, "errorMessage": errorMessage })
+        console.error({ "errorCode": errorCode, "errorMessage": errorMessage });
+        notifyError(`${error.message}`)
       });
   }
 
