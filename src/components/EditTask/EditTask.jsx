@@ -24,13 +24,22 @@ export const EditTask = ({
     setTaskContent(card.taskContent);
   }, [card])
 
+  const [editTaskAllowed, setEditTaskAllowed] = useState(false);
+  useEffect(() => {
+    taskContent.length < 1 ? setEditTaskAllowed(false) : setEditTaskAllowed(true);
+  }, [taskContent])
+
   return (
     <div className="edit-task-container">
       <header>
         <h1>Editar tarefa</h1>
         <div className="action-buttons">
           <Trash size={36} weight="duotone" onClick={() => deleteCard(card.id)} />
-          <CloudArrowUp size={36} weight="duotone" onClick={() => updateCard(card.id)} />
+          {
+            editTaskAllowed ?
+            <CloudArrowUp size={36} weight="fill" onClick={() => updateCard(card.id)} /> :
+            <CloudArrowUp size={36} weight="duotone" />
+          }
         </div>
       </header>
       <textarea 

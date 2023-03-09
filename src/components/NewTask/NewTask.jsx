@@ -30,7 +30,7 @@ export const NewTask = ({ handleClose }) => {
 
   const [newTaskAllowed, setNewTaskAllowed] = useState(false);
   useEffect(() => {
-    taskContent.length < 2 ? setNewTaskAllowed(false) : setNewTaskAllowed(true);
+    taskContent.length < 1 ? setNewTaskAllowed(false) : setNewTaskAllowed(true);
   }, [taskContent])
 
   return (
