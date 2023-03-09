@@ -26,7 +26,7 @@ export const EditTask = ({
 
   const [editTaskAllowed, setEditTaskAllowed] = useState(false);
   useEffect(() => {
-    taskContent.length < 1 ? setEditTaskAllowed(false) : setEditTaskAllowed(true);
+    taskContent?.length < 1 ? setEditTaskAllowed(false) : setEditTaskAllowed(true);
   }, [taskContent])
 
   return (
