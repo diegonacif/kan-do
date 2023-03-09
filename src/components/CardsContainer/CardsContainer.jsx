@@ -12,6 +12,8 @@ import { ToastifyContext } from '../../contexts/ToastifyProvider';
 import Rodal from 'rodal';
 import '../../css/App.css';
 
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+
 export const CardsContainer = ({ refresh }) => {
   const { user } = useContext(AuthEmailContext); // Email Context
   const { notifySuccess } = useContext(ToastifyContext); // Toastify Context
@@ -26,30 +28,6 @@ export const CardsContainer = ({ refresh }) => {
   const [editCard, setEditCard] = useState('');
   const [status, setStatus] = useState('');
   const [taskContent, setTaskContent] = useState('');
-
-
-  // Todo Cards
-  const [todoCards, setTodoCards] = useState([]);
-  useEffect(() => {
-    const cards = cardsRaw?.filter(cards => cards.status === "A fazer");
-    setTodoCards(cards);
-  }, [cardsRaw])
-
-  // Doing Cards
-  const [doingCards, setDoingCards] = useState([]);
-  useEffect(() => {
-    const cards = cardsRaw?.filter(cards => cards.status === "Em andamento");
-    setDoingCards(cards);
-  }, [cardsRaw])
-
-  // Done Cards
-  const [doneCards, setDoneCards] = useState([]);
-  useEffect(() => {
-    const cards = cardsRaw?.filter(cards => cards.status === "Feito");
-    setDoneCards(cards);
-  }, [cardsRaw])
-
-
 
   // Users Data
   useEffect(() => {
@@ -111,94 +89,189 @@ export const CardsContainer = ({ refresh }) => {
     setTaskContent('');
     setLocalRefresh(current => !current);
   }
+
+  // Todo List
+  const [todoList, setTodoList] = useState();
+  useEffect(() => {
+    const cards = cardsRaw?.filter(cards => cards.status === "A fazer");
+    setTodoList(cards);
+  }, [cardsRaw])
+
+  function handleOnDragEndTodo(result) {
+    if(!result.destination) return;
+    const items = Array.from(todoList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setTodoList(items)
+  }
+
+  // Doing List
+  const [doingList, setDoingList] = useState([]);
+  useEffect(() => {
+    const cards = cardsRaw?.filter(cards => cards.status === "Em andamento");
+    setDoingList(cards);
+  }, [cardsRaw])
+
+  function handleOnDragEndDoing(result) {
+    if(!result.destination) return;
+    const items = Array.from(doingList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setDoingList(items)
+  }
+
+  // Done Cards
+  const [doneList, setDoneList] = useState([]);
+  useEffect(() => {
+    const cards = cardsRaw?.filter(cards => cards.status === "Feito");
+    setDoneList(cards);
+  }, [cardsRaw])
+
+  function handleOnDragEndDone(result) {
+    if(!result.destination) return;
+    const items = Array.from(doneList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    setDoneList(items)
+  }
   
   return (
     <div className={`cards-container-container ${isLightMode && 'light-mode'}`}>
       <div className="cards-container-wrapper">
-        <section>
-          <div className="section-title">
-            <div className="section-title-content" id="title-todo">
-              <Circle size={13} color="#f1e585" weight="fill" />
-              <span>À FAZER ({todoCards?.length})</span>
+        <DragDropContext onDragEnd={handleOnDragEndTodo}>
+          <section>
+            <div className="section-title">
+              <div className="section-title-content" id="title-todo">
+                <Circle size={13} color="#f1e585" weight="fill" />
+                <span>À FAZER ({todoList?.length})</span>
+              </div>
             </div>
-          </div>
-          <div className="cards-wrapper">
-            {
-              firestoreLoading ?
-              null :
-              todoCards?.map((card) => {
-                return (
-                  <div 
-                    key={`div-${card.id}`}
-                    onClick={() => handleOpenEditTask(card)}
-                  >
-                    <KanCard 
-                      key={card.id}
-                      status={card.status}
-                      taskContent={card.taskContent}
-                    />
-                  </div>
-                )
-              })
-            }
-          </div>
-        </section>
-        <section>
-          <div className="section-title">
-            <div className="section-title-content" id="title-doing">
-              <Circle size={13} color="#12a9ca" weight="fill" />
-              <span>FAZENDO ({doingCards?.length})</span>
+            <Droppable droppableId="todo-droppable">
+              {(provided) => (
+                <div 
+                  className="cards-wrapper" 
+                  {...provided.droppableProps} 
+                  ref={provided.innerRef}
+                >
+                  {
+                    firestoreLoading ?
+                    null :
+                    todoList?.map((card, index) => {
+                      return (
+                        <Draggable key={`div-${card.id}`} draggableId={`div-${card.id}`} index={index} >
+                          {(provided) => (
+                            <div 
+                              onClick={() => handleOpenEditTask(card)}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              ref={provided.innerRef}
+                            >
+                              <KanCard 
+                                key={card.id}
+                                status={card.status}
+                                taskContent={card.taskContent}
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      )
+                    })
+                  }
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </section>
+        </DragDropContext>
+        <DragDropContext onDragEnd={handleOnDragEndDoing}>
+          <section>
+            <div className="section-title">
+              <div className="section-title-content" id="title-doing">
+                <Circle size={13} color="#12a9ca" weight="fill" />
+                <span>FAZENDO ({doingList?.length})</span>
+              </div>
             </div>
-          </div>
-          <div className="cards-wrapper">
-          {
-              firestoreLoading ?
-              null :
-              doingCards?.map((card) => {
-                return (
-                  <div 
-                    key={`div-${card.id}`}
-                    onClick={() => handleOpenEditTask(card)}
-                  >
-                    <KanCard 
-                      key={card.id}
-                      status={card.status}
-                      taskContent={card.taskContent}
-                    />
-                  </div>
-                )
-              })
-            }
-          </div>
-        </section>
-        <section>
-          <div className="section-title">
-            <div className="section-title-content" id="title-done">
-              <Circle size={13} color="#26b89f" weight="fill" />
-              <span>FEITO ({doneCards?.length})</span>
+            <Droppable droppableId="doing-droppable">
+              {(provided) => (
+              <div 
+                className="cards-wrapper"
+                {...provided.droppableProps} 
+                ref={provided.innerRef}
+              >
+                {
+                  firestoreLoading ?
+                  null :
+                  doingList?.map((card, index) => {
+                    return (
+                      <Draggable key={`div-${card.id}`} draggableId={`div-${card.id}`} index={index} >
+                        {(provided) => (
+                          <div 
+                            onClick={() => handleOpenEditTask(card)}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            <KanCard 
+                              key={card.id}
+                              status={card.status}
+                              taskContent={card.taskContent}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    )
+                  })
+                }
+                {provided.placeholder}
+              </div>
+              )}
+            </Droppable>
+          </section>
+        </DragDropContext>
+        <DragDropContext onDragEnd={handleOnDragEndDone}>
+          <section>
+            <div className="section-title">
+              <div className="section-title-content" id="title-done">
+                <Circle size={13} color="#26b89f" weight="fill" />
+                <span>FEITO ({doneList?.length})</span>
+              </div>
             </div>
-          </div>
-          <div className="cards-wrapper">
-          {
-              firestoreLoading ?
-              null :
-              doneCards?.map((card) => {
-                return (
-                  <div 
-                    key={`div-${card.id}`}
-                    onClick={() => handleOpenEditTask(card)}
-                  >
-                    <KanCard 
-                      key={card.id}
-                      status={card.status}
-                      taskContent={card.taskContent}
-                    />
-                  </div>
-                )
-              })
-            }
-          </div>
-        </section>
+            <Droppable droppableId="done-droppable">
+            {(provided) => (
+              <div 
+                className="cards-wrapper"
+                {...provided.droppableProps} 
+                ref={provided.innerRef}
+              >
+                {
+                  firestoreLoading ?
+                  null :
+                  doneList?.map((card, index) => {
+                    return (
+                      <Draggable key={`div-${card.id}`} draggableId={`div-${card.id}`} index={index} >
+                        {(provided) => (
+                          <div 
+                            onClick={() => handleOpenEditTask(card)}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
+                          >
+                            <KanCard 
+                              key={card.id}
+                              status={card.status}
+                              taskContent={card.taskContent}
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    )
+                  })
+                }
+              </div>
+            )}
+            </Droppable>
+          </section>
+        </DragDropContext>
       </div>
       <Rodal
         visible={editTaskShow}

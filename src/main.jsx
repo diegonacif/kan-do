@@ -1,4 +1,5 @@
 import React from 'react'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import ReactDOM from 'react-dom/client'
 import {
   BrowserRouter,
@@ -14,7 +15,7 @@ import { ToastifyProvider } from './contexts/ToastifyProvider';
 import { PrivateRoutes } from './PrivateRoutes';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ToastifyProvider>
       <AuthEmailProvider>
         <SelectedBoardProvider>
@@ -31,5 +32,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </SelectedBoardProvider>
       </AuthEmailProvider>
     </ToastifyProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )
