@@ -72,8 +72,6 @@ export const Sidebar = ({ modalHide }) => {
     newBoardName.length < 2 ? setNewBoardAllowed(false) : setNewBoardAllowed(true);
   }, [newBoardName])
 
-  console.log(newBoardAllowed);
-
   return (
     <div className={`sidebar-container ${isLightMode && 'light-mode'}`}>
       <header>

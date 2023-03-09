@@ -28,11 +28,20 @@ export const NewTask = ({ handleClose }) => {
     });
   }
 
+  const [newTaskAllowed, setNewTaskAllowed] = useState(false);
+  useEffect(() => {
+    taskContent.length < 2 ? setNewTaskAllowed(false) : setNewTaskAllowed(true);
+  }, [taskContent])
+
   return (
     <div className="new-task-container">
       <header>
         <h1>Nova tarefa</h1>
-        <PlusCircle size={36} weight="duotone" onClick={() => handleSubmit()} />
+        {
+          newTaskAllowed ?
+          <PlusCircle size={36} weight="fill" onClick={() => handleSubmit()} /> :
+          <PlusCircle size={36} weight="duotone" />
+        }
       </header>
       <textarea 
         name="taks" 
