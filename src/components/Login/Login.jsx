@@ -102,7 +102,7 @@ export const Login = () => {
   // Buttons validation
   const [isConfirmButtonAllowed, setIsConfirmButtonAllowed] = useState(false);
   useEffect(() => {
-    if(watch('email').length < 6 || watch('password').length < 6) {
+    if(watch('email').length < 12 || watch('password').length < 6) {
       return setIsConfirmButtonAllowed(false)
     } else {
       return setIsConfirmButtonAllowed(true)
@@ -110,7 +110,7 @@ export const Login = () => {
   }, [watch()])
   const [isSendButtonAllowed, setIsSendButtonAllowed] = useState(false);
   useEffect(() => {
-    if(watch('emailReset')?.length < 6) {
+    if(watch('emailReset')?.length < 12) {
       return setIsSendButtonAllowed(false)
     } else {
       return setIsSendButtonAllowed(true)
