@@ -139,16 +139,16 @@
       font-weight: 600;
       cursor: pointer;
       z-index: 10;
-    }
-  }
+      transition: border 0.3s color 0.3s background-color 0.3s;
 
-  #background-video {
-    position: absolute;
-    top: 3.5rem;
-    left: 0;
-    z-index: 1;
-    min-height: calc(100vh - 3.5rem);
-    min-width: 100vw;
+      &:disabled {
+        background-color: transparent;
+        color: $gray-200;
+        border: 2px solid $gray-200;
+        cursor: not-allowed;
+        transition: border 0.3s color 0.3s background-color 0.3s;
+      }
+    }
   }
 
   &.light-mode {
@@ -174,6 +174,13 @@
 
       #forgot-password, #register {
         color: $gray-900;
+      }
+    }
+
+    button {
+      &:disabled {
+        color: $gray-800;
+        border: 2px solid $gray-800;
       }
     }
   }

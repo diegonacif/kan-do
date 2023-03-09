@@ -89,7 +89,6 @@ export const Login = () => {
     loginUser();
     handleResetState("login");
   }
-
   function handleXButton () {
     if(loginMode === "login") {
       return navigate("/");
@@ -99,6 +98,18 @@ export const Login = () => {
       return;
     }
   }
+
+  // Buttons validation
+  const [isConfirmButtonAllowed, setIsConfirmButtonAllowed] = useState(false);
+  useEffect(() => {
+    if(watch('email').length < 6 || watch('password').length < 6) {
+      return setIsConfirmButtonAllowed(false)
+    } else {
+      return setIsConfirmButtonAllowed(true)
+    }
+  }, [watch()])
+  const [isSendButtonAllowed, setIsSendButtonAllowed] = useState(false);
+  const [isRegisterButtonAllowed, setIsRegisterButtonAllowed] = useState(false);
 
   return (
     <div className={`login-container ${isLightMode && 'light-mode'}`}>
@@ -123,11 +134,6 @@ export const Login = () => {
         }
       </header>
       <section className="login-wrapper">
-        {/* <video id="background-video" loop autoPlay muted>
-          <source src={bgVideo} type="video/mp4" />
-          <source src={bgVideo} type="video/webm" />
-          Your browser does not support the video tag.
-        </video> */}
         {
           loginMode === "login" ?
           // Login Mode
@@ -168,17 +174,16 @@ export const Login = () => {
             </div>
             <span id="forgot-password" onClick={() => handleResetState("forgotPassword")}>Esqueci a senha</span>
             <span id="register" onClick={() => handleResetState("register")}>Cadastrar-se agora</span>
-            <button onClick={() => loginUser()}>Confirmar</button>
+            <button 
+              onClick={() => handleLogin()} 
+              disabled={isConfirmButtonAllowed ? "" : "disabled"}
+            >
+              Confirmar
+            </button>
           </> :
           loginMode === "forgotPassword" ?
           // Forgot Password Mode
           <>
-            {/* <XCircle 
-              size={36} 
-              color="#1cbdc8" 
-              weight="duotone" id="close-button" 
-              onClick={() => handleResetState("login")} 
-            /> */}
             <h3>Insira seu e-mail e clique em Enviar</h3>
             <div className="input-wrapper">
               <div className="input-row">
@@ -196,12 +201,6 @@ export const Login = () => {
           loginMode === "register" ?
           // Register Mode
           <>
-            {/* <XCircle 
-              size={36} 
-              color="#1cbdc8" 
-              weight="duotone" id="close-button" 
-              onClick={() => handleResetState("login")} 
-            /> */}
             <h3>Faça seu registro</h3>
             <div className="input-wrapper">
               <div className="input-row">

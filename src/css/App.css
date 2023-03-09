@@ -479,14 +479,14 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
   font-weight: 600;
   cursor: pointer;
   z-index: 10;
+  transition: border 0.3s color 0.3s background-color 0.3s;
 }
-.login-container #background-video {
-  position: absolute;
-  top: 3.5rem;
-  left: 0;
-  z-index: 1;
-  min-height: calc(100vh - 3.5rem);
-  min-width: 100vw;
+.login-container .login-wrapper button:disabled {
+  background-color: transparent;
+  color: #cecece;
+  border: 2px solid #cecece;
+  cursor: not-allowed;
+  transition: border 0.3s color 0.3s background-color 0.3s;
 }
 .login-container.light-mode {
   background: #e0e0e0;
@@ -508,6 +508,10 @@ a:focus-visible, a:focus-within, a:focus, a:active, a:target {
 }
 .login-container.light-mode .login-wrapper #forgot-password, .login-container.light-mode .login-wrapper #register {
   color: #21212D;
+}
+.login-container.light-mode button:disabled {
+  color: #2C2C38;
+  border: 2px solid #2C2C38;
 }
 
 .header-menu-container {
