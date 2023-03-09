@@ -71,6 +71,7 @@ export const AuthEmailProvider = ({ children }) => {
     try {
       await signOut(auth);
       console.log(user);
+      window.localStorage.clear();
       notifySuccess('Você está deslogado!')
     } catch (error) {
       console.error(error.message);
