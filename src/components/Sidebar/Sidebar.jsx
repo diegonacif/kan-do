@@ -67,6 +67,13 @@ export const Sidebar = ({ modalHide }) => {
     width: 'fit-content',
   }
 
+  const [newBoardAllowed, setNewBoardAllowed] = useState(false);
+  useEffect(() => {
+    newBoardName.length < 2 ? setNewBoardAllowed(false) : setNewBoardAllowed(true);
+  }, [newBoardName])
+
+  console.log(newBoardAllowed);
+
   return (
     <div className={`sidebar-container ${isLightMode && 'light-mode'}`}>
       <header>
@@ -112,7 +119,11 @@ export const Sidebar = ({ modalHide }) => {
       >
         <div className="rodal-row">
           <h3>Criar novo quadro</h3>
-          <PlusCircle size={32} weight="fill" onClick={() => handleNewBoard()} />
+          {
+            newBoardAllowed ?
+            <PlusCircle size={32} weight="fill" onClick={() => handleNewBoard()} /> :
+            <PlusCircle size={32} weight="duotone" />
+          }
         </div>
         <input type="text" placeholder="Nome do quadro" onChange={(e) => setNewBoardName(e.target.value)} />
       </Rodal>
