@@ -109,7 +109,21 @@ export const Login = () => {
     }
   }, [watch()])
   const [isSendButtonAllowed, setIsSendButtonAllowed] = useState(false);
+  useEffect(() => {
+    if(watch('emailReset')?.length < 6) {
+      return setIsSendButtonAllowed(false)
+    } else {
+      return setIsSendButtonAllowed(true)
+    }
+  }, [watch()])
   const [isRegisterButtonAllowed, setIsRegisterButtonAllowed] = useState(false);
+  useEffect(() => {
+    if(watch('registerEmail')?.length < 12 || watch('registerPassword')?.length < 6 || watch('confirmRegisterPassword') !== watch('registerPassword')) {
+      return setIsRegisterButtonAllowed(false)
+    } else {
+      return setIsRegisterButtonAllowed(true)
+    }
+  }, [watch()])
 
   return (
     <div className={`login-container ${isLightMode && 'light-mode'}`}>
@@ -196,7 +210,12 @@ export const Login = () => {
               </div>
               
             </div>
-            <button onClick={() => handleForgotPassword()}>Enviar</button>
+            <button 
+              onClick={() => handleForgotPassword()}
+              disabled={isSendButtonAllowed ? "" : "disabled"}
+            >
+              Enviar
+            </button>
           </> :
           loginMode === "register" ?
           // Register Mode
@@ -243,7 +262,12 @@ export const Login = () => {
                 />
               </div>
             </div>
-            <button onClick={() => handleRegister()}>Registrar-se</button>
+            <button 
+              onClick={() => handleRegister()}
+              disabled={isRegisterButtonAllowed ? "" : "disabled"}
+            >
+              Registrar-se
+            </button>
           </> :
           null
         }
