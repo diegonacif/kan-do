@@ -9,6 +9,7 @@ import {
 import { auth } from '../services/firebase-config';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { ToastifyContext } from "./ToastifyProvider";
+import { SelectedBoardContext } from "./SelectedBoardProvider";
 
 export const AuthEmailContext = createContext({});
 
@@ -27,6 +28,7 @@ export const AuthEmailProvider = ({ children }) => {
   const { notifySuccess, notifyError } = useContext(ToastifyContext); // Toastify Context
 
   const [userState, loading, error] = useAuthState(auth);
+
 
   onAuthStateChanged(auth, (currentUser) => {
     if (loading) {
@@ -71,7 +73,6 @@ export const AuthEmailProvider = ({ children }) => {
     try {
       await signOut(auth);
       console.log(user);
-      window.localStorage.clear();
       notifySuccess('Você está deslogado!')
     } catch (error) {
       console.error(error.message);
